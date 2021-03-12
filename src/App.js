@@ -1,5 +1,6 @@
 import Header from "./components/Header/Header";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
 	return (
