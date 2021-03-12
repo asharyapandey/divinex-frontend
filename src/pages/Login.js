@@ -1,4 +1,5 @@
-import "./Login.scss";
+import "./Auth.scss";
+import LoginImage from "./login.jpg";
 
 function Login() {
 	return (
@@ -22,7 +23,10 @@ function Login() {
 					</form>
 				</div>
 			</div>
-			<div className="auth-container__image"></div>
+			<div
+				className="auth-container__image"
+				style={{ backgroundImage: `url(${LoginImage})` }}
+			></div>
 		</div>
 	);
 }
