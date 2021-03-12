@@ -1,0 +1,18 @@
+$stuble-black: #acacac;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Roboto Mono", monospace;
+	background-color: #f3f3f3;
+}
+
+.container {
+	width: 100%;
+	background-color: #fff;
+	border-bottom: 1px solid $stuble-black;
+}
