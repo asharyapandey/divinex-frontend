@@ -13,7 +13,7 @@ function Login() {
 					<h1 className="heading">DivineX</h1>
 					<p>Login for Divine Experience</p>
 					<form>
-						<div class="form-g">
+						<div className="form-g">
 							<label for="username">Username:</label>
 							<input
 								type="text"
@@ -22,7 +22,7 @@ function Login() {
 								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</div>
-						<div class="form-g">
+						<div className="form-g">
 							<label for="password">Password:</label>
 							<input
 								type="password"
@@ -31,7 +31,7 @@ function Login() {
 								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</div>
-						<button type="submit" class="button">
+						<button type="submit" className="button">
 							Login
 						</button>
 					</form>
