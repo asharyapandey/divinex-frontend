@@ -6,9 +6,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
 	return (
 		<Router>
-			<Route exact path="/login" component={Login} />
-			<Route exact path="/register" component={Register} />
-			<Route exact path="/" component={Header} />
+			<Switch>
+				<Route exact path="/login" component={Login} />
+				<Route exact path="/register" component={Register} />
+				<Route exact path="/" component={Header} />
+			</Switch>
 		</Router>
 	);
 }

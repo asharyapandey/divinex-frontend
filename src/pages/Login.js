@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Auth.scss";
+import "./Login.scss";
 import LoginImage from "./login.jpg";
 import { Link } from "react-router-dom";
 

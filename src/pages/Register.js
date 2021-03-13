@@ -1,13 +1,18 @@
 import { useState } from "react";
-import "./Auth.scss";
+import "./Register.scss";
 import RegisterImage from "./register.jpg";
 import { Link } from "react-router-dom";
 
 function Register() {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
+	const [gender, setGender] = useState("Male");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+	};
 	return (
 		<div className="auth-container">
 			<div className="auth-container__content">
@@ -32,6 +37,19 @@ function Register() {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 							/>
+						</div>
+						<div className="form-g">
+							<label htmlFor="gender">Gender</label>
+							<select
+								name="gender"
+								id="gender"
+								onChange={(e) => setGender(e.target.value)}
+							>
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+
+								<option value="Others">Others</option>
+							</select>
 						</div>
 						<div className="form-g">
 							<label for="password">Password:</label>
