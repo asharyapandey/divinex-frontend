@@ -43,6 +43,7 @@
 }
 .form-g {
 	font-size: 1.3rem;
+	margin-bottom: 0.5rem;
 
 	& label {
 		display: block;
@@ -53,10 +54,15 @@
 		padding: 0.5rem;
 		font-size: inherit;
 		font-family: inherit;
-		margin: 0.5rem 0rem;
+		margin-top: 0.5rem;
 		width: 100%;
 	}
 	& input:focus {
 		outline: 1px solid #00308f;
+	}
+
+	.error {
+		font-size: 0.8rem;
+		color: red;
 	}
 }

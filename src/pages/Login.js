@@ -14,7 +14,7 @@ function Login() {
 					<p>Login for Divine Experience</p>
 					<form>
 						<div className="form-g">
-							<label for="username">Username:</label>
+							<label htmlFor="username">Username:</label>
 							<input
 								type="text"
 								id="username"
@@ -23,7 +23,7 @@ function Login() {
 							/>
 						</div>
 						<div className="form-g">
-							<label for="password">Password:</label>
+							<label htmlFor="password">Password:</label>
 							<input
 								type="password"
 								id="password"

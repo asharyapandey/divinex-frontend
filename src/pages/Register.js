@@ -9,9 +9,29 @@ function Register() {
 	const [gender, setGender] = useState("Male");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const [validationErrors, setValidationErrors] = useState({
+		usernameError: "",
+		emailError: "",
+		genderError: "",
+		passwordError: "",
+		confirmPasswordError: "",
+	});
 
-	const onSubmit = (e) => {
+	const validate = () => {
+		if (username === "") {
+			const newValidationError = validationErrors;
+			newValidationError.usernameError = "Username is Required";
+			setValidationErrors(newValidationError);
+			return false;
+		}
+		return true;
+	};
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (validate()) {
+			console.log(username);
+		}
 	};
 	return (
 		<div className="auth-container">
@@ -19,18 +39,21 @@ function Register() {
 				<div className="content">
 					<h1 className="heading">DivineX</h1>
 					<p>Register for Divine Experience</p>
-					<form>
+					<form onSubmit={handleSubmit}>
 						<div className="form-g">
-							<label for="username">Username:</label>
+							<label htmlFor="username">Username:</label>
 							<input
 								type="text"
 								id="username"
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
 							/>
+							<span className="error">
+								{validationErrors.usernameError}
+							</span>
 						</div>
 						<div className="form-g">
-							<label for="email">Email:</label>
+							<label htmlFor="email">Email:</label>
 							<input
 								type="email"
 								id="email"
@@ -43,6 +66,7 @@ function Register() {
 							<select
 								name="gender"
 								id="gender"
+								value={gender}
 								onChange={(e) => setGender(e.target.value)}
 							>
 								<option value="Male">Male</option>
@@ -52,7 +76,7 @@ function Register() {
 							</select>
 						</div>
 						<div className="form-g">
-							<label for="password">Password:</label>
+							<label htmlFor="password">Password:</label>
 							<input
 								type="password"
 								id="password"
@@ -61,7 +85,7 @@ function Register() {
 							/>
 						</div>
 						<div className="form-g">
-							<label for="confirmPassword">
+							<label htmlFor="confirmPassword">
 								Confirm Password:
 							</label>
 							<input
