@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import "./Auth.scss";
 import RegisterImage from "./register.jpg";
+
 import { Link } from "react-router-dom";
+
+const op = {
+	usernameError: "",
+	emailError: "",
+	passwordError: "",
+	confirmPasswordError: "",
+};
 
 function Register() {
 	const [username, setUsername] = useState("");
@@ -9,35 +17,48 @@ function Register() {
 	const [gender, setGender] = useState("Male");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [validationErrors, setValidationErrors] = useState({
-		usernameError: "dfdf",
-		emailError: "",
-		genderError: "",
-		passwordError: "",
-		confirmPasswordError: "",
-	});
-
-	useEffect(() => {
-		console.log(validationErrors);
-	}, [validationErrors]);
-
+	const [usernameError, setUsernameError] = useState("");
+	const [emailError, setEmailError] = useState("");
+	const [passwordError, setPasswordError] = useState("");
+	const [cpError, setCpError] = useState("");
 	const validate = () => {
 		if (username === "") {
-			// = garda kheri reference copy hunxa
-			const newValidationError = { ...validationErrors };
-			newValidationError.usernameError = "Username is Required";
-			console.log("new", newValidationError);
-			setValidationErrors(newValidationError);
+			setUsernameError("Username is Required");
 			return false;
+		} else {
+			setUsernameError("");
 		}
+		if (email === "") {
+			setEmailError("Email is Required");
+			return false;
+		} else {
+			setEmailError("");
+		}
+
+		if (password === "") {
+			setPasswordError("Password is Required");
+			return false;
+		} else {
+			setPasswordError("");
+		}
+
+		if (confirmPassword === "") {
+			setCpError("Please Confirm the password");
+			return false;
+		} else {
+			setCpError("");
+		}
+
+		if (password !== confirmPassword) return false;
+
 		return true;
 	};
 
 	const handleSubmit = (e) => {
-		console.log(validate());
 		e.preventDefault();
 		if (validate()) {
-			console.log(username);
+			const data = { username, email, gender, password };
+			console.log(data);
 		}
 	};
 	return (
@@ -55,9 +76,7 @@ function Register() {
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
 							/>
-							<span className="error">
-								{validationErrors.usernameError}
-							</span>
+							<span className="error">{usernameError}</span>
 						</div>
 						<div className="form-g">
 							<label htmlFor="email">Email:</label>
@@ -67,9 +86,7 @@ function Register() {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 							/>
-							<span className="error">
-								{validationErrors.emailError}
-							</span>
+							<span className="error">{emailError}</span>
 						</div>
 						<div className="form-g">
 							<label htmlFor="gender">Gender:</label>
@@ -84,9 +101,6 @@ function Register() {
 
 								<option value="Others">Others</option>
 							</select>
-							<span className="error">
-								{validationErrors.genderError}
-							</span>
 						</div>
 						<div className="form-g">
 							<label htmlFor="password">Password:</label>
@@ -96,9 +110,7 @@ function Register() {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 							/>
-							<span className="error">
-								{validationErrors.passwordError}
-							</span>
+							<span className="error">{passwordError}</span>
 						</div>
 						<div className="form-g">
 							<label htmlFor="confirmPassword">
@@ -108,13 +120,14 @@ function Register() {
 								type="password"
 								id="confirmPassword"
 								value={confirmPassword}
-								onChange={(e) =>
-									setConfirmPassword(e.target.value)
-								}
+								onChange={(e) => {
+									setConfirmPassword(e.target.value);
+									if (e.target.value !== password)
+										setCpError("Passwords Don't Match");
+									else setCpError("");
+								}}
 							/>
-							<span className="error">
-								{validationErrors.confirmPasswordError}
-							</span>
+							<span className="error">{cpError}</span>
 						</div>
 						<button type="submit" className="button">
 							Register
