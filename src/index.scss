@@ -16,3 +16,18 @@ body {
 	background-color: #fff;
 	border-bottom: 1px solid $stuble-black;
 }
+.button {
+	background-color: #00308f;
+	color: white;
+	font-family: inherit;
+	font-size: 1.3rem;
+	outline: none;
+	border: none;
+	padding: 0.8rem;
+	width: 100%;
+	transition: transform 0.2s ease-in;
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 2px 2px 5px 0px #cdc9d3;
+	}
+}
