@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Auth.scss";
 import RegisterImage from "./register.jpg";
 import { Link } from "react-router-dom";
@@ -10,17 +10,23 @@ function Register() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [validationErrors, setValidationErrors] = useState({
-		usernameError: "",
+		usernameError: "dfdf",
 		emailError: "",
 		genderError: "",
 		passwordError: "",
 		confirmPasswordError: "",
 	});
 
+	useEffect(() => {
+		console.log(validationErrors);
+	}, [validationErrors]);
+
 	const validate = () => {
 		if (username === "") {
-			const newValidationError = validationErrors;
+			// = garda kheri reference copy hunxa
+			const newValidationError = { ...validationErrors };
 			newValidationError.usernameError = "Username is Required";
+			console.log("new", newValidationError);
 			setValidationErrors(newValidationError);
 			return false;
 		}
@@ -28,6 +34,7 @@ function Register() {
 	};
 
 	const handleSubmit = (e) => {
+		console.log(validate());
 		e.preventDefault();
 		if (validate()) {
 			console.log(username);
@@ -39,7 +46,7 @@ function Register() {
 				<div className="content">
 					<h1 className="heading">DivineX</h1>
 					<p>Register for Divine Experience</p>
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} className="l-form">
 						<div className="form-g">
 							<label htmlFor="username">Username:</label>
 							<input
@@ -60,6 +67,9 @@ function Register() {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 							/>
+							<span className="error">
+								{validationErrors.emailError}
+							</span>
 						</div>
 						<div className="form-g">
 							<label htmlFor="gender">Gender:</label>
@@ -74,6 +84,9 @@ function Register() {
 
 								<option value="Others">Others</option>
 							</select>
+							<span className="error">
+								{validationErrors.genderError}
+							</span>
 						</div>
 						<div className="form-g">
 							<label htmlFor="password">Password:</label>
@@ -83,6 +96,9 @@ function Register() {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 							/>
+							<span className="error">
+								{validationErrors.passwordError}
+							</span>
 						</div>
 						<div className="form-g">
 							<label htmlFor="confirmPassword">
@@ -96,6 +112,9 @@ function Register() {
 									setConfirmPassword(e.target.value)
 								}
 							/>
+							<span className="error">
+								{validationErrors.confirmPasswordError}
+							</span>
 						</div>
 						<button type="submit" className="button">
 							Register
