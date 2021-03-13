@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Auth.scss";
 import RegisterImage from "./register.jpg";
+import { Link } from "react-router-dom";
 
 function Register() {
 	const [username, setUsername] = useState("");
@@ -11,7 +12,7 @@ function Register() {
 		<div className="auth-container">
 			<div className="auth-container__content">
 				<div className="content">
-					<h1 className="heading">Divinex</h1>
+					<h1 className="heading">DivineX</h1>
 					<p>Register for Divine Experience</p>
 					<form>
 						<div class="form-g">
@@ -58,6 +59,9 @@ function Register() {
 							Register
 						</button>
 					</form>
+					<p>
+						Click <Link to="/login">Here</Link> to login
+					</p>
 				</div>
 			</div>
 			<div

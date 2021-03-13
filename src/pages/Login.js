@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Auth.scss";
 import LoginImage from "./login.jpg";
+import { Link } from "react-router-dom";
 
 function Login() {
 	const [username, setUsername] = useState("");
@@ -9,7 +10,7 @@ function Login() {
 		<div className="auth-container">
 			<div className="auth-container__content">
 				<div className="content">
-					<h1 className="heading">Divinex</h1>
+					<h1 className="heading">DivineX</h1>
 					<p>Login for Divine Experience</p>
 					<form>
 						<div class="form-g">
@@ -34,6 +35,9 @@ function Login() {
 							Login
 						</button>
 					</form>
+					<p>
+						Click <Link to="/register">Here</Link> to register
+					</p>
 				</div>
 			</div>
 			<div
