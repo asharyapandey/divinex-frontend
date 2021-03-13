@@ -1,13 +1,18 @@
 import { useState } from "react";
 import "./Auth.scss";
 import LoginImage from "./login.jpg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
+import { publicFetch } from "../utils/fetch";
 
 function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [usernameError, setUsernameError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
+
+	const { addToast } = useToasts();
+	const history = useHistory();
 	const validate = () => {
 		if (username === "") {
 			setUsernameError("Username is Required");
@@ -24,11 +29,26 @@ function Login() {
 		return true;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (validate()) {
 			const data = { username, password };
-			console.log(data);
+			try {
+				const response = await publicFetch.post(
+					"/api/user/login",
+					data
+				);
+				addToast("Login Successfull" + response.data.token, {
+					appearance: "success",
+				});
+				// go to login
+				history.push("/login");
+			} catch (error) {
+				console.log(error.response);
+				addToast(error.response.data.error, {
+					appearance: "error",
+				});
+			}
 		}
 	};
 	return (
