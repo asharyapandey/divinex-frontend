@@ -46,14 +46,14 @@
 
 	& label {
 		display: block;
-		padding: 0rem 1rem;
 	}
 
-	& input {
-		padding: 1rem;
+	& input,
+	select {
+		padding: 0.5rem;
 		font-size: inherit;
 		font-family: inherit;
-		margin: 1rem;
+		margin: 0.5rem 0rem;
 		width: 100%;
 	}
 	& input:focus {

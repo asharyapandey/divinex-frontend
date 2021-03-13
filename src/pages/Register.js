@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Register.scss";
+import "./Auth.scss";
 import RegisterImage from "./register.jpg";
 import { Link } from "react-router-dom";
 
@@ -39,7 +39,7 @@ function Register() {
 							/>
 						</div>
 						<div className="form-g">
-							<label htmlFor="gender">Gender</label>
+							<label htmlFor="gender">Gender:</label>
 							<select
 								name="gender"
 								id="gender"
