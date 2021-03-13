@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Auth.scss";
 import RegisterImage from "./register.jpg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { publicFetch } from "../utils/fetch";
 
@@ -17,6 +17,7 @@ function Register() {
 	const [cpError, setCpError] = useState("");
 
 	const { addToast } = useToasts();
+	const history = useHistory();
 
 	const validate = () => {
 		if (username === "") {
@@ -60,6 +61,8 @@ function Register() {
 				addToast("Your Account Was Registered", {
 					appearance: "success",
 				});
+				// go to login
+				history.push("/login");
 			} catch (error) {
 				console.log(error.response);
 				addToast(error.response.data.error, {
