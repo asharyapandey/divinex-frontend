@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./Auth.scss";
 import RegisterImage from "./register.jpg";
 import { Link } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
+import { publicFetch } from "../utils/fetch";
 
 function Register() {
 	const [username, setUsername] = useState("");
@@ -13,6 +15,9 @@ function Register() {
 	const [emailError, setEmailError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [cpError, setCpError] = useState("");
+
+	const { addToast } = useToasts();
+
 	const validate = () => {
 		if (username === "") {
 			setUsernameError("Username is Required");
@@ -46,11 +51,21 @@ function Register() {
 		return true;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (validate()) {
 			const data = { username, email, gender, password };
-			console.log(data);
+			try {
+				await publicFetch.post("/api/user", data);
+				addToast("Your Account Was Registered", {
+					appearance: "success",
+				});
+			} catch (error) {
+				console.log(error.response);
+				addToast(error.response.data.error, {
+					appearance: "error",
+				});
+			}
 		}
 	};
 	return (

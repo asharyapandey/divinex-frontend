@@ -8,7 +8,11 @@ function App() {
 	return (
 		<Router>
 			<Switch>
-				<ToastProvider>
+				<ToastProvider
+					autoDismiss="true"
+					autoDismissTimeout="5000"
+					placement="top-center"
+				>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/" component={Header} />
