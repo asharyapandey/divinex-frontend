@@ -1,15 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Auth.scss";
 import RegisterImage from "./register.jpg";
-
 import { Link } from "react-router-dom";
-
-const op = {
-	usernameError: "",
-	emailError: "",
-	passwordError: "",
-	confirmPasswordError: "",
-};
 
 function Register() {
 	const [username, setUsername] = useState("");
