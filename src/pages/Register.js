@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./Auth.scss";
 import RegisterImage from "./register.jpg";
 import { Link, useHistory } from "react-router-dom";
-import { useToasts } from "react-toast-notifications";
 import { publicFetch } from "../utils/fetch";
 
 function Register() {
@@ -16,7 +15,6 @@ function Register() {
 	const [passwordError, setPasswordError] = useState("");
 	const [cpError, setCpError] = useState("");
 
-	const { addToast } = useToasts();
 	const history = useHistory();
 
 	const validate = () => {
@@ -58,16 +56,10 @@ function Register() {
 			const data = { username, email, gender, password };
 			try {
 				await publicFetch.post("/api/user", data);
-				addToast("Your Account Was Registered", {
-					appearance: "success",
-				});
 				// go to login
 				history.push("/login");
 			} catch (error) {
 				console.log(error.response);
-				addToast(error.response.data.error, {
-					appearance: "error",
-				});
 			}
 		}
 	};
