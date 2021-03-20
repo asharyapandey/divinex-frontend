@@ -3,6 +3,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Explore from "./pages/Explore";
 
 function App() {
 	return (
@@ -35,9 +38,9 @@ const privateRoutes = () => {
 	return (
 		<Switch>
 			<Header />
-			<Route exact path="/" component={Header} />
-			<Route exact path="/register" component={Register} />
-			<Route exact path="/register" component={Register} />
+			<Route exact path="/" component={Home} />
+			<Route exact path="/explore" component={Explore} />
+			<Route exact path="/profile" component={Profile} />
 		</Switch>
 	);
 };
