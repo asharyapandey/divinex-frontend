@@ -38,7 +38,8 @@ function Login() {
 					"/api/user/login",
 					data
 				);
-				addToast("Login Successfull" + response.data.token, {
+				localStorage.setItem("token", response.data.token);
+				addToast("Login Successfull", {
 					appearance: "success",
 				});
 				// go to login

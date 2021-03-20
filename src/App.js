@@ -22,4 +22,24 @@ function App() {
 	);
 }
 
+const publicRoutes = () => {
+	return (
+		<Switch>
+			<Route exact path="/login" component={Login} />
+			<Route exact path="/register" component={Register} />
+		</Switch>
+	);
+};
+
+const privateRoutes = () => {
+	return (
+		<Switch>
+			<Header />
+			<Route exact path="/" component={Header} />
+			<Route exact path="/register" component={Register} />
+			<Route exact path="/register" component={Register} />
+		</Switch>
+	);
+};
+
 export default App;
