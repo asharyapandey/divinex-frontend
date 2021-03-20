@@ -1,40 +1,49 @@
 import Header from "./components/Header/Header";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Explore from "./pages/Explore";
 
-function App() {
+import { UserContext } from "./contexts/UserContext";
+import { useContext } from "react";
+
+const App = () => {
+	const { isAuth } = useContext(UserContext);
 	return (
 		<Router>
-			<Switch>
-				<ToastProvider
-					autoDismiss="true"
-					autoDismissTimeout="5000"
-					placement="top-center"
-				>
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/register" component={Register} />
-					<Route exact path="/" component={Header} />
-				</ToastProvider>
-			</Switch>
+			<ToastProvider
+				autoDismiss="true"
+				autoDismissTimeout="5000"
+				placement="top-center"
+			>
+				{console.log(isAuth())}
+				{isAuth() ? <PrivateRoutes /> : <PublicRoutes />}
+			</ToastProvider>
 		</Router>
 	);
-}
+};
 
-const publicRoutes = () => {
+const PublicRoutes = () => {
 	return (
 		<Switch>
 			<Route exact path="/login" component={Login} />
 			<Route exact path="/register" component={Register} />
+			<Route path="/" exact>
+				<Redirect to="/register" />
+			</Route>
 		</Switch>
 	);
 };
 
-const privateRoutes = () => {
+const PrivateRoutes = () => {
 	return (
 		<Switch>
 			<Header />
