@@ -42,16 +42,19 @@ const PublicRoutes = () => {
 
 const PrivateRoutes = () => {
 	return (
-		<Switch>
+		<>
+			<Header />
 			<div className="content">
-				<Route exact path="/" component={Home} />
-				<Route exact path="/explore" component={Explore} />
-				<Route exact path="/profile" component={Profile} />
-				<Route path="*">
-					<h1>404: Page not found</h1>
-				</Route>
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route exact path="/explore" component={Explore} />
+					<Route exact path="/profile" component={Profile} />
+					<Route path="*">
+						<h1>404: Page not found</h1>
+					</Route>
+				</Switch>
 			</div>
-		</Switch>
+		</>
 	);
 };
 
