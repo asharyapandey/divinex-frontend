@@ -4,6 +4,7 @@ import LoginImage from "./login.jpg";
 import { Link, useHistory } from "react-router-dom";
 import { publicFetch } from "../utils/fetch";
 import { UserContext } from "../contexts/UserContext";
+import { toast } from "react-toastify";
 
 function Login() {
 	const [username, setUsername] = useState("");
@@ -41,10 +42,16 @@ function Login() {
 				);
 				console.log(response);
 				setUser(response.data.token, response.data.user);
+				toast.success("Login Successful", {
+					position: "top-center",
+				});
 				// go to login
 				history.replace("/");
 			} catch (error) {
 				console.log(error.response);
+				toast.success(error.response.data.error, {
+					position: "top-center",
+				});
 			}
 		}
 	};

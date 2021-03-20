@@ -3,7 +3,6 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-	console.log(localStorage.getItem("token"));
 	const [token, setToken] = useState(localStorage.getItem("token"));
 	const [userInfo, setUserInfo] = useState(() => {
 		JSON.parse(localStorage.getItem("userInfo"));
@@ -13,7 +12,7 @@ const UserProvider = ({ children }) => {
 
 	const setUser = (token, userInfo) => {
 		localStorage.setItem("token", token);
-		localStorage.setItem("userInfo", token);
+		localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
 		setToken(token);
 		setUserInfo(userInfo);
