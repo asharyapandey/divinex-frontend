@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Card from "./Card";
 import { privateFetch } from "../../utils/fetch";
+import { toast } from "react-toastify";
 
 function CardList() {
 	const [feed, setFeed] = useState([]);
@@ -11,6 +12,9 @@ function CardList() {
 			setFeed(response.data.posts);
 		} catch (error) {
 			console.log(error);
+			toast.error(error.response.data.error, {
+				position: "top-center",
+			});
 		}
 	};
 
