@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Search.scss";
 import { privateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
@@ -8,6 +8,8 @@ const Search = () => {
 	const [showResults, setShowResults] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
+
+	const ref = useRef(null);
 
 	const handleChange = async (e) => {
 		// do REST call
@@ -28,8 +30,22 @@ const Search = () => {
 		if (searchTerm === "") setShowResults(false);
 	}, [searchTerm]);
 
+	const handleClickOutside = (e) => {
+		if (ref.current && !ref.current.contains(e.target)) {
+			setShowResults(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("click", handleClickOutside, true);
+
+		return () => {
+			document.removeEventListener("click", handleClickOutside, true);
+		};
+	}, []);
+
 	return (
-		<>
+		<div ref={ref}>
 			<form>
 				<input
 					onChange={handleChange}
@@ -51,7 +67,7 @@ const Search = () => {
 			) : (
 				""
 			)}
-		</>
+		</div>
 	);
 };
 
