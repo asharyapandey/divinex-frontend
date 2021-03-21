@@ -45,3 +45,22 @@ $stuble-black: #acacac;
 		margin-right: 0;
 	}
 }
+.comments {
+	padding: 0.5rem;
+	ul {
+		list-style: none;
+	}
+	&__option {
+		font-weight: 100;
+	}
+
+	&__username {
+		color: #000;
+		font-weight: 500;
+		display: inline;
+	}
+
+	&__comment {
+		display: inline;
+	}
+}
