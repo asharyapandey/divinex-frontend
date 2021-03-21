@@ -49,7 +49,7 @@ function Login() {
 				history.replace("/");
 			} catch (error) {
 				console.log(error.response);
-				toast.success(error.response.data.error, {
+				toast.error(error.response.data.error, {
 					position: "top-center",
 				});
 			}

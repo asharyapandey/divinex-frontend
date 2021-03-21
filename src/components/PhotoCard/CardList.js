@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "./Card";
 import { privateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
@@ -10,6 +10,9 @@ function CardList() {
 		try {
 			const response = await privateFetch.get("/api/post/feed");
 			setFeed(response.data.posts);
+			toast.error("data ta ayo", {
+				position: "top-center",
+			});
 		} catch (error) {
 			console.log(error);
 			toast.error(error.response.data.error, {
@@ -18,12 +21,15 @@ function CardList() {
 		}
 	};
 
+	useEffect(() => {
+		getFeed();
+	}, []);
+
 	return (
 		<div>
-			<Card />
-			<Card />
-			<Card />
-			<Card />
+			{feed.map((post) => (
+				<Card key={post._id} post={post} />
+			))}
 		</div>
 	);
 }
