@@ -1,4 +1,6 @@
-const ProfilePage = () => {
+import "./ProfileDetails.scss";
+
+const ProfileDetails = () => {
 	return (
 		<div className="ProfileDetails">
 			<div className="ProfileDetails__image">
@@ -6,6 +8,7 @@ const ProfilePage = () => {
 			</div>
 
 			<div className="ProfileDetails__user-options">
+				<p>ashrayapandey</p>
 				<button className="button edit-profile">Edit Profile</button>
 			</div>
 
@@ -29,4 +32,4 @@ const ProfilePage = () => {
 	);
 };
 
-export default ProfilePage;
+export default ProfileDetails;
