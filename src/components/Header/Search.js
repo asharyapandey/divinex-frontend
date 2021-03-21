@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./Search.scss";
 import { privateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
+import User from "../User";
 
 const Search = () => {
 	const [showResults, setShowResults] = useState(false);
@@ -40,7 +41,9 @@ const Search = () => {
 			{showResults ? (
 				<div className="search__results">
 					{searchResults.length > 0 ? (
-						searchResults.map((result) => <p>{result.username}</p>)
+						searchResults.map((result) => (
+							<User key={result._id} user={result} />
+						))
 					) : (
 						<p>No Users Avilable</p>
 					)}

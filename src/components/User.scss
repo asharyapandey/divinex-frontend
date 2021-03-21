@@ -1,0 +1,18 @@
+.User {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	&__image {
+		padding: 0px 5px;
+		img {
+			width: 2rem;
+			height: 2rem;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+	}
+
+	&:hover {
+		background-color: #f3f3f3;
+	}
+}
