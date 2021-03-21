@@ -12,13 +12,31 @@ const Header = () => {
 					<Search />
 				</div>
 				<div className="nav header__nav">
-					<Icon image="/images/home.png" altText="Home Icon" />
 					<Icon
+						path="/"
+						image="/images/home.png"
+						altText="Home Icon"
+					/>
+					<Icon
+						path="/explore"
 						image="/images/direction.png"
 						altText="Direction Icon"
 					/>
-					<Icon image="/images/heart.png" altText="Heart Icon" />
-					<Icon image="/images/user.png" altText="User Icon" />
+					<Icon
+						path="/notification"
+						image="/images/heart.png"
+						altText="Heart Icon"
+					/>
+					<Icon
+						path="/profile"
+						image="/images/user.png"
+						altText="User Icon"
+					/>
+					<Icon
+						path="/profile"
+						image="/images/user.png"
+						altText="User Icon"
+					/>
 				</div>
 			</header>
 		</div>
