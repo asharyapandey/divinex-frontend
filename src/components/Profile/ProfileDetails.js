@@ -8,7 +8,7 @@ const ProfileDetails = () => {
 			</div>
 
 			<div className="ProfileDetails__user-options">
-				<p>ashrayapandey</p>
+				<p className="username">ashrayapandey</p>
 				<button className="button edit-profile">Edit Profile</button>
 			</div>
 
