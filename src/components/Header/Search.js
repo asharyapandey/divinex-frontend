@@ -1,14 +1,26 @@
 import { useState, useEffect } from "react";
 import "./Search.scss";
+import { privateFetch } from "../../utils/fetch";
+import { toast } from "react-toastify";
 
 const Search = () => {
 	const [showResults, setShowResults] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
+	const [searchResults, setSearchResults] = useState([]);
 
-	const handleChange = (e) => {
+	const handleChange = async (e) => {
 		// do REST call
 		setShowResults(true);
 		setSearchTerm(e.target.value);
+		try {
+			const response = await privateFetch.get(
+				`/api/user/search/?term=${searchTerm}`
+			);
+			setSearchResults(response.data.users);
+		} catch (error) {
+			console.log(error);
+			toast.error("Could not search for user");
+		}
 	};
 
 	useEffect(() => {
