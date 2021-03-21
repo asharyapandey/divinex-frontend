@@ -39,7 +39,11 @@ const Search = () => {
 			</form>
 			{showResults ? (
 				<div className="search__results">
-					<p>No Terms</p>
+					{searchResults.length > 0 ? (
+						searchResults.map((result) => <p>{result.username}</p>)
+					) : (
+						<p>No Users Avilable</p>
+					)}
 				</div>
 			) : (
 				""
