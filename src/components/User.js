@@ -10,7 +10,6 @@ function User({ user }) {
 						"/images/profile_picture/male_img.png"
 					}
 					alt="Profile "
-					srcset=""
 				/>
 			</div>
 			<div className="User__username">{user.username}</div>

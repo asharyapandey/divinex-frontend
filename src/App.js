@@ -8,7 +8,6 @@ import {
 	Redirect,
 } from "react-router-dom";
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
 import Explore from "./pages/Explore";
 
 import { UserContext } from "./contexts/UserContext";
@@ -17,6 +16,7 @@ import { useContext } from "react";
 // for toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
 	const { isAuth } = useContext(UserContext);
@@ -48,7 +48,7 @@ const PrivateRoutes = () => {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/explore" component={Explore} />
-					<Route exact path="/profile" component={Profile} />
+					<Route exact path="/profile" component={ProfilePage} />
 					<Route path="*">
 						<h1>404: Page not found</h1>
 					</Route>

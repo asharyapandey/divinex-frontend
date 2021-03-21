@@ -10,9 +10,6 @@ function CardList() {
 		try {
 			const response = await privateFetch.get("/api/post/feed");
 			setFeed(response.data.posts);
-			toast.error("data ta ayo", {
-				position: "top-center",
-			});
 		} catch (error) {
 			console.log(error);
 			toast.error(error.response.data.error, {
