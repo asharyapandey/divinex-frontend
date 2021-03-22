@@ -52,3 +52,9 @@
 		width: 950px;
 	}
 }
+
+.scrolled {
+	position: fixed;
+	top: 0;
+	z-index: 1;
+}

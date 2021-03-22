@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Auth.scss";
 import LoginImage from "./login.jpg";
 import { Link, useHistory } from "react-router-dom";
-import { useToasts } from "react-toast-notifications";
 import { publicFetch } from "../utils/fetch";
+import { UserContext } from "../contexts/UserContext";
+import { toast } from "react-toastify";
 
 function Login() {
 	const [username, setUsername] = useState("");
@@ -11,7 +12,8 @@ function Login() {
 	const [usernameError, setUsernameError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 
-	const { addToast } = useToasts();
+	const { setUser } = useContext(UserContext);
+
 	const history = useHistory();
 	const validate = () => {
 		if (username === "") {
@@ -38,15 +40,17 @@ function Login() {
 					"/api/user/login",
 					data
 				);
-				addToast("Login Successfull" + response.data.token, {
-					appearance: "success",
+				console.log(response);
+				setUser(response.data.token, response.data.user);
+				toast.success("Login Successful", {
+					position: "top-center",
 				});
 				// go to login
-				history.push("/login");
+				history.replace("/");
 			} catch (error) {
 				console.log(error.response);
-				addToast(error.response.data.error, {
-					appearance: "error",
+				toast.error(error.response.data.error, {
+					position: "top-center",
 				});
 			}
 		}
