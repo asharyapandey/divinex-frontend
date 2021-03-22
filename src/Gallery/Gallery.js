@@ -1,9 +1,15 @@
 import GalleryItem from "./GalleryItem";
 import "./Gallery.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Gallery({ photos }) {
-	const [posts, _] = useState(photos);
+	const [posts, setPosts] = useState([]);
+
+	useEffect(() => {
+		setPosts(photos);
+	}, [photos]);
+
+	const wideImageLocation = [2, 8, 14, 20];
 	return (
 		<div className="Gallery">
 			<GalleryItem span={false} />
@@ -12,6 +18,8 @@ function Gallery({ photos }) {
 			<GalleryItem span={false} />
 			<GalleryItem span={false} />
 			<GalleryItem span={false} />
+
+			{posts.map}
 		</div>
 	);
 }
