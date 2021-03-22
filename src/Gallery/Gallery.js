@@ -1,13 +1,17 @@
 import GalleryItem from "./GalleryItem";
 import "./Gallery.scss";
+import { useState } from "react";
 
-function Gallery() {
+function Gallery({ photos }) {
+	const [posts, _] = useState(photos);
 	return (
 		<div className="Gallery">
-			<GalleryItem />
-			<GalleryItem />
-			<GalleryItem />
-			<GalleryItem />
+			<GalleryItem span={false} />
+			<GalleryItem span={true} />
+			<GalleryItem span={false} />
+			<GalleryItem span={false} />
+			<GalleryItem span={false} />
+			<GalleryItem span={false} />
 		</div>
 	);
 }

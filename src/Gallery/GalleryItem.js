@@ -1,15 +1,16 @@
 import "./GalleryItem.scss";
 
-function GalleryItem() {
+function GalleryItem({ span }) {
+	const classes = span ? "GalleryItem item_wide" : "GalleryItem";
 	return (
-		<div className="GalleryItem">
+		<div className={classes}>
 			<div className="GalleryItem__image">
-				<img src="/images/profile_picture/male_img.png" alt="" />
+				<img src="/images/posts/mock_img.jpg" alt="" />
 			</div>
 			<div className="GalleryItem__info">
 				<ul>
-					<li className="GalleryItem__info--likes">200</li>
-					<li className="GalleryItem__info--comments">200</li>
+					<li className="GalleryItem__info--likes">😍 200</li>
+					<li className="GalleryItem__info--comments">✍ 200</li>
 				</ul>
 			</div>
 		</div>

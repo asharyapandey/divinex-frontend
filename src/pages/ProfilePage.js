@@ -5,6 +5,7 @@ const ProfilePage = () => {
 	return (
 		<>
 			<ProfileDetails />
+			<hr />
 			<Gallery />
 		</>
 	);
