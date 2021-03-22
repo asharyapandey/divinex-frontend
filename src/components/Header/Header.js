@@ -15,7 +15,7 @@ const Header = () => {
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
 
-		return () => window.removeEventListener("scroll");
+		return () => window.removeEventListener("scroll", handleScroll, true);
 	}, []);
 
 	const classes = scrolled ? "container scrolled" : "container";

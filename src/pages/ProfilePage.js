@@ -1,11 +1,11 @@
 import ProfileDetails from "../components/Profile/ProfileDetails";
-import GalleryItem from "../Gallery/GalleryItem";
+import Gallery from "../Gallery/Gallery";
 
 const ProfilePage = () => {
 	return (
 		<>
 			<ProfileDetails />
-			<GalleryItem />
+			<Gallery />
 		</>
 	);
 };
