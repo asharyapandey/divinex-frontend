@@ -20,13 +20,13 @@ const ProfileDetails = ({ user, postLength }) => {
 					</li>
 					<li className="stat-item">
 						<span className="stat-item__count">
-							{user.followers.length}
+							{user.followers ? user.followers.length : 0}
 						</span>
 						followers
 					</li>
 					<li className="stat-item">
 						<span className="stat-item__count">
-							{user.following.length}
+							{user.following ? user.following.length : 0}
 						</span>
 						following
 					</li>

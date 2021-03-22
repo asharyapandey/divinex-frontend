@@ -14,20 +14,21 @@ const ProfilePage = () => {
 			setUser(respose.data.user);
 		} catch (error) {
 			console.log(error);
-			toast.error(error.response.data.error);
+			toast.error(error);
 		}
 	};
 	const getPosts = async () => {
 		try {
 			const respose = await privateFetch.get("/api/post/");
-			setPosts(respose.data.user);
+			setPosts(respose.data.posts);
 		} catch (error) {
 			console.log(error);
-			toast.error(error.response.data.error);
+			toast.error(error);
 		}
 	};
 	useEffect(() => {
 		getUser();
+		getPosts();
 	}, []);
 
 	return (

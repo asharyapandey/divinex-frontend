@@ -9,17 +9,15 @@ function Gallery({ photos }) {
 		setPosts(photos);
 	}, [photos]);
 
-	const wideImageLocation = [2, 8, 14, 20];
+	const wideImageLocation = [1, 7, 13, 19];
 	return (
 		<div className="Gallery">
-			<GalleryItem span={false} />
-			<GalleryItem span={true} />
-			<GalleryItem span={false} />
-			<GalleryItem span={false} />
-			<GalleryItem span={false} />
-			<GalleryItem span={false} />
+			{posts.map((post, index) => {
+				let span = false;
+				if (wideImageLocation.includes(index)) span = true;
 
-			{posts.map}
+				return <GalleryItem key={post._id} span={span} post={post} />;
+			})}
 		</div>
 	);
 }
