@@ -35,6 +35,11 @@ const Header = () => {
 						altText="Home Icon"
 					/>
 					<Icon
+						path="/profile"
+						image="/images/photo.png"
+						altText="Add Photo Icon"
+					/>
+					<Icon
 						path="/explore"
 						image="/images/direction.png"
 						altText="Direction Icon"
@@ -43,11 +48,6 @@ const Header = () => {
 						path="/notification"
 						image="/images/heart.png"
 						altText="Heart Icon"
-					/>
-					<Icon
-						path="/profile"
-						image="/images/user.png"
-						altText="User Icon"
 					/>
 					<Icon
 						path="/profile"
