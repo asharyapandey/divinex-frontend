@@ -1,10 +1,12 @@
 import Icon from "./Icon";
 import "./Header.scss";
 import Search from "./Search";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Modal from "../Modal";
 
 const Header = () => {
 	const [scrolled, setScrolled] = useState(false);
+	const modal = useRef(null);
 
 	const handleScroll = () => {
 		const offset = window.pageYOffset;
@@ -17,6 +19,10 @@ const Header = () => {
 
 		return () => window.removeEventListener("scroll", handleScroll, true);
 	}, []);
+
+	const openModal = () => {
+		modal.current.open();
+	};
 
 	const classes = scrolled ? "container scrolled" : "container";
 
@@ -34,11 +40,13 @@ const Header = () => {
 						image="/images/home.png"
 						altText="Home Icon"
 					/>
-					<Icon
-						path="/profile"
-						image="/images/photo.png"
-						altText="Add Photo Icon"
-					/>
+					<div className="Icon" onClick={openModal}>
+						<img
+							src="/images/photo.png"
+							alt="Add New"
+							className="Icon__image"
+						/>
+					</div>
 					<Icon
 						path="/explore"
 						image="/images/direction.png"
@@ -56,6 +64,7 @@ const Header = () => {
 					/>
 				</div>
 			</header>
+			<Modal ref={modal}>Hello FUcker</Modal>
 		</div>
 	);
 };
