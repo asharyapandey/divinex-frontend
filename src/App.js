@@ -24,7 +24,7 @@ const App = () => {
 	return (
 		<Router>
 			{isAuth() ? <PrivateRoutes /> : <PublicRoutes />}
-			<ToastContainer />
+			<ToastContainer position="top-center" />
 		</Router>
 	);
 };
