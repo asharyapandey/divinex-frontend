@@ -1,6 +1,10 @@
 import "./Card.scss";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 const Card = ({ post }) => {
+	const { userInfo } = useContext(UserContext);
+
 	return (
 		<div className="card">
 			<div className="card__header">
@@ -14,11 +18,22 @@ const Card = ({ post }) => {
 					/>
 				</div>
 				<div className="card__header--username">
-					<a href="#">{post.user.username}</a>
+					<a href={`/profile/${post.user._id}`}>
+						{post.user.username}
+					</a>
 				</div>
-				<div className="card__header--hamburger icon-comp">
-					<img src="images/more.png" alt="" />
-				</div>
+				{userInfo._id === post.user._id ? (
+					<div className="card__header--actions">
+						<button className="button button--action button--action-1">
+							Edit
+						</button>
+						<button className="button button--action button--action-2">
+							Delete
+						</button>
+					</div>
+				) : (
+					""
+				)}
 			</div>
 			<div className="card__image">
 				<img src={post.image} alt="" />

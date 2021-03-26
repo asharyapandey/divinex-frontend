@@ -4,9 +4,9 @@ export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
-	const [userInfo, setUserInfo] = useState(() => {
-		JSON.parse(localStorage.getItem("userInfo"));
-	});
+	const [userInfo, setUserInfo] = useState(
+		JSON.parse(localStorage.getItem("userInfo"))
+	);
 
 	const isAuth = () => token != null;
 

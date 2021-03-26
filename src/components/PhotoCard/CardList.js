@@ -12,7 +12,7 @@ function CardList() {
 			setFeed(response.data.posts);
 		} catch (error) {
 			console.log(error);
-			toast.error(error.response.data.error, {
+			toast.error("Some Kind of error occured", {
 				position: "top-center",
 			});
 		}

@@ -30,6 +30,23 @@ body {
 		transform: translateY(-2px);
 		box-shadow: 2px 2px 5px 0px #cdc9d3;
 	}
+
+	&--action {
+		padding: 0.2rem;
+		font-size: 1rem;
+		background-color: transparent;
+		border-radius: 5px;
+
+		&-2 {
+			border: 1px solid red;
+			color: red;
+		}
+		&-1 {
+			border: 1px solid blue;
+			color: blue;
+			margin-right: 0.5rem;
+		}
+	}
 }
 
 .content {

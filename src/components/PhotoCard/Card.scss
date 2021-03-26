@@ -24,7 +24,9 @@ $stuble-black: #acacac;
 			}
 		}
 
-		&--hamburger {
+		&--actions {
+			display: flex;
+			width: 30%;
 			margin-left: auto;
 		}
 	}

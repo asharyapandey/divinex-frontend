@@ -64,7 +64,7 @@ const Header = () => {
 					/>
 				</div>
 			</header>
-			<Modal ref={modal}>Hello FUcker</Modal>
+			<Modal ref={modal}>Hello </Modal>
 		</div>
 	);
 };
