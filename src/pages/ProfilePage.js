@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ProfileDetails from "../components/Profile/ProfileDetails";
-import Gallery from "../Gallery/Gallery";
+import Gallery from "../components/Gallery/Gallery";
 import { toast } from "react-toastify";
 import { privateFetch } from "../utils/fetch";
 

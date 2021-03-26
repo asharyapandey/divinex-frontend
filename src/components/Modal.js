@@ -20,7 +20,7 @@ function Modal({ children, defaultOpened = false, fade = false }, ref) {
 
 	return createPortal(
 		isOpen ? (
-			<div className={`modal ${fade ? "modal-fade" : ""}`}>
+			<div className="modal">
 				<div className="modal-overlay" onClick={close} />
 				<span
 					role="button"

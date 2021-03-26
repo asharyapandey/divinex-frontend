@@ -3,6 +3,7 @@ import "./Header.scss";
 import Search from "./Search";
 import { useEffect, useRef, useState } from "react";
 import Modal from "../Modal";
+import AddPhoto from "../PhotoCard/AddPhoto";
 
 const Header = () => {
 	const [scrolled, setScrolled] = useState(false);
@@ -64,7 +65,9 @@ const Header = () => {
 					/>
 				</div>
 			</header>
-			<Modal ref={modal}>Hello </Modal>
+			<Modal ref={modal}>
+				<AddPhoto />
+			</Modal>
 		</div>
 	);
 };

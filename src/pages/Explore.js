@@ -1,4 +1,4 @@
-import Gallery from "../Gallery/Gallery";
+import Gallery from "../components/Gallery/Gallery";
 import { useState, useEffect } from "react";
 import { privateFetch } from "../utils/fetch";
 import { toast } from "react-toastify";
