@@ -50,7 +50,11 @@ const PrivateRoutes = () => {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/explore" component={Explore} />
-					<Route exact path="/profile" component={ProfilePage} />
+					<Route
+						exact
+						path="/profile/:userID"
+						component={ProfilePage}
+					/>
 					<Route exact path="/post/:postID" component={PostDetails} />
 					<Route
 						exact

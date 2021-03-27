@@ -4,13 +4,15 @@ import Gallery from "../components/Gallery/Gallery";
 import { toast } from "react-toastify";
 import { privateFetch } from "../utils/fetch";
 
-const ProfilePage = () => {
+const ProfilePage = ({ match }) => {
 	const [user, setUser] = useState({});
 	const [posts, setPosts] = useState([]);
 
 	const getUser = async () => {
 		try {
-			const respose = await privateFetch.get("/api/user/");
+			const respose = await privateFetch.get(
+				`/api/user/${match.params.userID}`
+			);
 			setUser(respose.data.user);
 		} catch (error) {
 			console.log(error);
@@ -19,7 +21,9 @@ const ProfilePage = () => {
 	};
 	const getPosts = async () => {
 		try {
-			const respose = await privateFetch.get("/api/post/");
+			const respose = await privateFetch.get(
+				`/api/post/user/${match.params.userID}`
+			);
 			setPosts(respose.data.posts);
 		} catch (error) {
 			console.log(error);

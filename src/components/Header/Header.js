@@ -1,12 +1,14 @@
 import Icon from "./Icon";
 import "./Header.scss";
 import Search from "./Search";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import Modal from "../Modal";
 import AddPhoto from "../PhotoCard/AddPhoto";
+import { UserContext } from "../../contexts/UserContext";
 
 const Header = () => {
 	const [scrolled, setScrolled] = useState(false);
+	const { userInfo } = useContext(UserContext);
 	const modal = useRef(null);
 
 	const handleScroll = () => {
@@ -59,7 +61,7 @@ const Header = () => {
 						altText="Heart Icon"
 					/>
 					<Icon
-						path="/profile"
+						path={`/profile/${userInfo._id}`}
 						image="/images/user.png"
 						altText="User Icon"
 					/>

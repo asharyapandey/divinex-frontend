@@ -4,7 +4,7 @@ const ProfileDetails = ({ user, postLength }) => {
 	return (
 		<div className="ProfileDetails">
 			<div className="ProfileDetails__image">
-				<img src={user.profilePicture} alt="" />
+				<img src={"/" + user.profilePicture} alt="" />
 			</div>
 
 			<div className="ProfileDetails__user-options">
