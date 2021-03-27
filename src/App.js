@@ -51,7 +51,7 @@ const PrivateRoutes = () => {
 					<Route exact path="/" component={Home} />
 					<Route exact path="/explore" component={Explore} />
 					<Route exact path="/profile" component={ProfilePage} />
-					<Route exact path="/post" component={PostDetails} />
+					<Route exact path="/post/:postID" component={PostDetails} />
 					<Route
 						exact
 						path="/notification"

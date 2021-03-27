@@ -21,6 +21,10 @@ $stuble-black: #acacac;
 			a {
 				color: black;
 				font-weight: 600;
+				text-decoration: none;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 		}
 
@@ -42,11 +46,24 @@ $stuble-black: #acacac;
 			a {
 				color: black;
 				font-weight: 500;
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 		}
 
 		.caption {
 			margin-left: 0.5rem;
+		}
+	}
+
+	&__footer--comments {
+		padding: 0.5rem 0;
+		a {
+			color: blue;
+			text-decoration: none;
 		}
 	}
 
@@ -59,25 +76,5 @@ $stuble-black: #acacac;
 	@media only screen and (min-width: 720px) {
 		margin-left: 0;
 		margin-right: 0;
-	}
-}
-.comments {
-	padding: 0.5rem;
-	ul {
-		list-style: none;
-	}
-	&__option {
-		font-weight: 100;
-		cursor: pointer;
-	}
-
-	&__username {
-		color: #000;
-		font-weight: 500;
-		display: inline;
-	}
-
-	&__comment {
-		display: inline;
 	}
 }

@@ -1,7 +1,6 @@
 .AddComment {
 	width: 100%;
 	display: flex;
-	position: sticky;
 
 	&__profile {
 		padding-right: 1rem;
@@ -21,7 +20,8 @@
 		}
 
 		button {
-			background-color: #fff333;
+			background-color: #1d1d8a;
+			color: white;
 			outline: none;
 			border: none;
 			font-weight: bold;
@@ -41,28 +41,54 @@
 }
 
 .Comment {
-	height: 4rem;
 	display: flex;
 	padding: 0.5rem;
+	background-color: #fff;
+	border-radius: 5px;
+	margin: 0.5rem 0;
 	&__profile {
+		margin-right: 0.5rem;
+		align-self: center;
 		img {
 			width: 2.8rem;
 			height: 2.8rem;
 			border-radius: 50%;
 		}
 	}
+	&__details {
+		&--username {
+			font-weight: 600;
+		}
+		&--comment {
+			padding-top: 0.5rem;
+			font-size: 0.9rem;
+		}
+		&--time {
+			padding-top: 0.5rem;
+			color: grey;
+			font-size: 0.5rem;
+		}
+	}
 
 	&__actions {
-		margin: 0 auto;
+		margin-left: auto;
 		align-self: center;
 		button {
-			background-color: #fff333;
 			outline: none;
 			border: none;
 			font-weight: bold;
+			color: #fff;
 			font-family: inherit;
 			cursor: pointer;
 			padding: 0.5rem;
+			margin-right: 0.2rem;
+		}
+
+		.button-edit {
+			background-color: #868135;
+		}
+		.button-delete {
+			background-color: #9b2731;
 		}
 	}
 }

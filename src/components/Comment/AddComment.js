@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 function AddComment() {
 	const { userInfo } = useContext(UserContext);
+	const [comment, setComment] = useState("");
 	return (
 		<div className="AddComment">
 			<div className="AddComment__profile">
@@ -10,9 +11,13 @@ function AddComment() {
 			</div>
 			<form>
 				<div>
-					<textarea name="caption" cols="300" rows="6">
-						Caption
-					</textarea>
+					<textarea
+						name="caption"
+						cols="300"
+						rows="6"
+						value={comment}
+						onChange={(e) => setComment(e.target.value)}
+					></textarea>
 				</div>
 				<div>
 					<button type="submit">Comment</button>

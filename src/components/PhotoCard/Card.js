@@ -1,8 +1,7 @@
 import "./Card.scss";
 import { useContext, useRef } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import Modal from "../Modal";
-import ViewPhoto from "./ViewPhoto";
+import { Link } from "react-router-dom";
 
 const Card = ({ post, isComments = false }) => {
 	const { userInfo } = useContext(UserContext);
@@ -55,23 +54,21 @@ const Card = ({ post, isComments = false }) => {
 						</div>
 						<p className="caption">{post.caption}</p>
 					</div>
-					<div className="card__footer--comments comments">
+					<div className="card__footer--comments">
 						{isComments ? (
-							<p
+							<Link
+								to={`/post/${post._id}`}
 								className="comments__option"
-								onClick={() => modal.current.open()}
 							>
 								view all comments
-							</p>
+							</Link>
 						) : (
 							""
 						)}
 					</div>
+					<div className="card__footer--time">few hours ago</div>
 				</div>
 			</div>
-			<Modal ref={modal}>
-				<ViewPhoto modal={modal.current} post={post} />
-			</Modal>
 		</>
 	);
 };
