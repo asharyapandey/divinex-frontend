@@ -4,7 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 import Modal from "../Modal";
 import ViewPhoto from "./ViewPhoto";
 
-const Card = ({ post }) => {
+const Card = ({ post, isComments = false }) => {
 	const { userInfo } = useContext(UserContext);
 	const modal = useRef(null);
 
@@ -47,31 +47,25 @@ const Card = ({ post }) => {
 					<div className="card__footer--icons icon-comp">
 						<img src="images/heart.png" alt="" />
 					</div>
+					<div className="card__footer--caption">
+						<div className="username">
+							<a href={`/profile/${post.user._id}`}>
+								{post.user.username}
+							</a>
+						</div>
+						<p className="caption">{post.caption}</p>
+					</div>
 					<div className="card__footer--comments comments">
-						<p
-							className="comments__option"
-							onClick={() => modal.current.open()}
-						>
-							view all comments
-						</p>
-						<ul>
-							<li>
-								<a href="" className="comments__username">
-									ashrayapandey
-								</a>
-								<p className="comments__comment">
-									wow what a nice photo
-								</p>
-							</li>
-							<li>
-								<a href="#" className="comments__username">
-									ashrayapandey
-								</a>
-								<p className="comments__comment">
-									wow what a nice photo
-								</p>
-							</li>
-						</ul>
+						{isComments ? (
+							<p
+								className="comments__option"
+								onClick={() => modal.current.open()}
+							>
+								view all comments
+							</p>
+						) : (
+							""
+						)}
 					</div>
 				</div>
 			</div>

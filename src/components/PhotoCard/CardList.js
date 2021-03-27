@@ -25,7 +25,7 @@ function CardList() {
 	return (
 		<div>
 			{feed.map((post) => (
-				<Card key={post._id} post={post} />
+				<Card key={post._id} post={post} isComments={true} />
 			))}
 		</div>
 	);

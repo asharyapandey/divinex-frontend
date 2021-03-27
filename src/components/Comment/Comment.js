@@ -15,6 +15,10 @@ const Comment = ({ comment }) => {
 					{comment.comment}
 				</div>
 			</div>
+			<div className="Comment__actions">
+				<button>Edit</button>
+				<button>delete</button>
+			</div>
 		</div>
 	);
 };

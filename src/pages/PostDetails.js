@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./PostDetails.scss";
 import { toast } from "react-toastify";
-import ShowPhoto from "../components/PhotoCard/ShowPhoto";
 import CommentContainer from "../components/Comment/CommentContainer";
+import Card from "../components/PhotoCard/Card";
 
 function PostDetails() {
 	const post = {
@@ -15,11 +15,13 @@ function PostDetails() {
 	};
 
 	return (
-		<>
-			<ShowPhoto post={post} />
+		<div className="PostDetails">
+			<div className="post">
+				<Card post={post} />
+			</div>
 			<p className="heading">Comments</p>
 			<CommentContainer />
-		</>
+		</div>
 	);
 }
 
