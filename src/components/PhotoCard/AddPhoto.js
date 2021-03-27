@@ -3,7 +3,7 @@ import "./AddPhoto.scss";
 import { privateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
 
-function AddPhoto({ close }) {
+function AddPhoto({ modal }) {
 	const [caption, setCaption] = useState("");
 	const [image, setImage] = useState("images/mock_img.jpg");
 	const [file, setFile] = useState();
@@ -31,7 +31,7 @@ function AddPhoto({ close }) {
 				const response = await privateFetch.post("/api/post", data);
 				if (response.data.success) {
 					toast.success("Post Added");
-					close();
+					modal.close();
 				}
 			} catch (error) {
 				console.log(error);

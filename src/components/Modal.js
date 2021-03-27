@@ -15,7 +15,7 @@ function Modal({ children, defaultOpened = false, fade = false }, ref) {
 			open: () => setIsOpen(true),
 			close: () => setIsOpen(false),
 		}),
-		[close]
+		[]
 	);
 
 	return createPortal(
