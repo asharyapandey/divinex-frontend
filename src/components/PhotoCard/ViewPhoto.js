@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./ViewPhoto.scss";
 import { privateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
+import CommentContainer from "../Comment/CommentContainer";
 
 function ViewPhoto({ modal, post }) {
 	return (
@@ -25,6 +26,9 @@ function ViewPhoto({ modal, post }) {
 							{post.user.username}
 						</a>
 					</div>
+				</div>
+				<div className="ViewPhoto__actions--comments">
+					<CommentContainer />
 				</div>
 			</div>
 		</div>
