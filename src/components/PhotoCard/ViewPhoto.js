@@ -1,7 +1,4 @@
-// import { useState } from "react";
 import "./ViewPhoto.scss";
-// import { privateFetch } from "../../utils/fetch";
-// import { toast } from "react-toastify";
 import CommentContainer from "../Comment/CommentContainer";
 
 function ViewPhoto({ modal, post }) {

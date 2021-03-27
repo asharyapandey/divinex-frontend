@@ -6,7 +6,6 @@ import Card from "../components/PhotoCard/Card";
 import { privateFetch } from "../utils/fetch";
 import AddComment from "../components/Comment/AddComment";
 import CommentList from "../components/Comment/CommentList";
-import { act } from "react-dom/test-utils";
 
 function PostDetails({ match }) {
 	const [post, setPost] = useState({});
