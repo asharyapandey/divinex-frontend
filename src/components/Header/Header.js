@@ -1,10 +1,15 @@
 import Icon from "./Icon";
 import "./Header.scss";
 import Search from "./Search";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
+import Modal from "../Modal";
+import AddPhoto from "../PhotoCard/AddPhoto";
+import { UserContext } from "../../contexts/UserContext";
 
 const Header = () => {
 	const [scrolled, setScrolled] = useState(false);
+	const { userInfo } = useContext(UserContext);
+	const modal = useRef(null);
 
 	const handleScroll = () => {
 		const offset = window.pageYOffset;
@@ -17,6 +22,10 @@ const Header = () => {
 
 		return () => window.removeEventListener("scroll", handleScroll, true);
 	}, []);
+
+	const openModal = () => {
+		modal.current.open();
+	};
 
 	const classes = scrolled ? "container scrolled" : "container";
 
@@ -34,6 +43,13 @@ const Header = () => {
 						image="/images/home.png"
 						altText="Home Icon"
 					/>
+					<div className="Icon" onClick={openModal}>
+						<img
+							src="/images/photo.png"
+							alt="Add New"
+							className="Icon__image"
+						/>
+					</div>
 					<Icon
 						path="/explore"
 						image="/images/direction.png"
@@ -45,17 +61,15 @@ const Header = () => {
 						altText="Heart Icon"
 					/>
 					<Icon
-						path="/profile"
-						image="/images/user.png"
-						altText="User Icon"
-					/>
-					<Icon
-						path="/profile"
+						path={`/profile/${userInfo._id}`}
 						image="/images/user.png"
 						altText="User Icon"
 					/>
 				</div>
 			</header>
+			<Modal ref={modal}>
+				<AddPhoto model={modal.current} />
+			</Modal>
 		</div>
 	);
 };

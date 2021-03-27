@@ -1,0 +1,40 @@
+.ViewPhoto {
+	width: 100%;
+	display: flex;
+	background-color: #fff;
+	&__image {
+		height: 100%;
+		width: 50%;
+
+		img {
+			width: 100%;
+			height: 100%;
+			background-size: contain;
+		}
+	}
+
+	&__actions {
+		padding: 1rem;
+		width: 50%;
+		&--header {
+			display: flex;
+			align-items: center;
+			justify-content: start;
+		}
+
+		&--profile-picture {
+			img {
+				width: 2.5rem;
+				height: 2.5rem;
+				border-radius: 50%;
+			}
+		}
+		&--username {
+			margin-left: 1rem;
+			a {
+				color: black;
+				font-weight: 600;
+			}
+		}
+	}
+}

@@ -12,7 +12,7 @@ function CardList() {
 			setFeed(response.data.posts);
 		} catch (error) {
 			console.log(error);
-			toast.error(error.response.data.error, {
+			toast.error("Some Kind of error occured", {
 				position: "top-center",
 			});
 		}
@@ -25,7 +25,7 @@ function CardList() {
 	return (
 		<div>
 			{feed.map((post) => (
-				<Card key={post._id} post={post} />
+				<Card key={post._id} post={post} isComments={true} />
 			))}
 		</div>
 	);

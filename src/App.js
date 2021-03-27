@@ -17,13 +17,15 @@ import { useContext } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage";
+import Notification from "./pages/Notification";
+import PostDetails from "./pages/PostDetails";
 
 const App = () => {
 	const { isAuth } = useContext(UserContext);
 	return (
 		<Router>
 			{isAuth() ? <PrivateRoutes /> : <PublicRoutes />}
-			<ToastContainer />
+			<ToastContainer position="top-center" />
 		</Router>
 	);
 };
@@ -33,7 +35,7 @@ const PublicRoutes = () => {
 		<Switch>
 			<Route exact path="/login" component={Login} />
 			<Route exact path="/register" component={Register} />
-			<Route path="/" exact>
+			<Route path="*" exact>
 				<Redirect to="/login" />
 			</Route>
 		</Switch>
@@ -48,7 +50,17 @@ const PrivateRoutes = () => {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/explore" component={Explore} />
-					<Route exact path="/profile" component={ProfilePage} />
+					<Route
+						exact
+						path="/profile/:userID"
+						component={ProfilePage}
+					/>
+					<Route exact path="/post/:postID" component={PostDetails} />
+					<Route
+						exact
+						path="/notification"
+						component={Notification}
+					/>
 					<Route path="*">
 						<h1>404: Page not found</h1>
 					</Route>
