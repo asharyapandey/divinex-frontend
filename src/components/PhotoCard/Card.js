@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 
 const Card = ({ post, isComments = false }) => {
 	const { userInfo } = useContext(UserContext);
+	const getTime = () => {
+		const date = new Date(post.createdAt);
+		const dateNow = new Date();
+		const diffInTime = dateNow.getTime() - date.getTime();
+		return diffInTime / (1000 * 3600 * 24);
+	};
 
 	return (
 		<>
@@ -59,7 +65,9 @@ const Card = ({ post, isComments = false }) => {
 							""
 						)}
 					</div>
-					<div className="card__footer--time">few hours ago</div>
+					<div className="card__footer--time">
+						{Math.round(getTime())} days ago
+					</div>
 				</div>
 			</div>
 		</>

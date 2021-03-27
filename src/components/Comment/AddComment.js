@@ -1,15 +1,23 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
-function AddComment() {
+function AddComment({ addComment, editComment, comment, setComment, action }) {
 	const { userInfo } = useContext(UserContext);
-	const [comment, setComment] = useState("");
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+		if (action === "") addComment();
+		else editComment();
+	};
 	return (
 		<div className="AddComment">
 			<div className="AddComment__profile">
-				<img src={userInfo.profilePicture} alt={userInfo.username} />
+				<img
+					src={"/" + userInfo.profilePicture}
+					alt={userInfo.username}
+				/>
 			</div>
-			<form>
+			<form onSubmit={onSubmit}>
 				<div>
 					<textarea
 						name="caption"
@@ -20,7 +28,12 @@ function AddComment() {
 					></textarea>
 				</div>
 				<div>
-					<button type="submit">Comment</button>
+					<button
+						type="submit"
+						disabled={comment === "" ? true : false}
+					>
+						{action === "" ? "Comment" : "Edit"}
+					</button>
 				</div>
 			</form>
 		</div>

@@ -1,40 +1,18 @@
 import Comment from "./Comment";
 
-const CommentList = () => {
-	const comment = [
-		{
-			comment: "coool",
-			commentedBy: {
-				username: "asharyapandey",
-				profilePicture: "/images/profile_picture/male_img.png",
-			},
-		},
-		{
-			comment: "coool",
-			commentedBy: {
-				username: "asharyapandey",
-				profilePicture: "/images/profile_picture/male_img.png",
-			},
-		},
-		{
-			comment: "coool",
-			commentedBy: {
-				username: "asharyapandey",
-				profilePicture: "/images/profile_picture/male_img.png",
-			},
-		},
-		{
-			comment: "coool",
-			commentedBy: {
-				username: "asharyapandey",
-				profilePicture: "/images/profile_picture/male_img.png",
-			},
-		},
-	];
+const CommentList = ({ comments, deleteComment, setID, setComment }) => {
 	return (
 		<div className="CommentList">
-			{comment.map((comment) => {
-				return <Comment comment={comment} />;
+			{comments.map((comment) => {
+				return (
+					<Comment
+						key={comment._id}
+						comment={comment}
+						deleteComment={deleteComment}
+						setID={setID}
+						setComment={setComment}
+					/>
+				);
 			})}
 		</div>
 	);

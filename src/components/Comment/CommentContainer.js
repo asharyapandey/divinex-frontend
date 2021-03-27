@@ -1,14 +1,7 @@
-import AddComment from "./AddComment";
-import CommentList from "./CommentList";
 import "./Comment.scss";
 
-function CommentContainer() {
-	return (
-		<div className="CommentContainer">
-			<AddComment />
-			<CommentList />
-		</div>
-	);
+function CommentContainer({ children }) {
+	return <div className="CommentContainer">{children}</div>;
 }
 
 export default CommentContainer;
