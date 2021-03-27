@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage";
 import Notification from "./pages/Notification";
+import PostDetails from "./pages/PostDetails";
 
 const App = () => {
 	const { isAuth } = useContext(UserContext);
@@ -50,6 +51,7 @@ const PrivateRoutes = () => {
 					<Route exact path="/" component={Home} />
 					<Route exact path="/explore" component={Explore} />
 					<Route exact path="/profile" component={ProfilePage} />
+					<Route exact path="/post" component={PostDetails} />
 					<Route
 						exact
 						path="/notification"

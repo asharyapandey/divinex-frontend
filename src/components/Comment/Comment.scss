@@ -36,12 +36,9 @@
 }
 
 .CommentList {
-	height: 80%;
-	overflow-y: scroll;
 }
 
 .Comment {
-	background-color: #f3f3f3;
 	height: 4rem;
 	display: flex;
 	padding: 0.5rem;
@@ -49,6 +46,7 @@
 		img {
 			width: 2.8rem;
 			height: 2.8rem;
+			border-radius: 50%;
 		}
 	}
 }

@@ -5,8 +5,8 @@ import "./Comment.scss";
 function CommentContainer() {
 	return (
 		<div className="CommentContainer">
-			<CommentList />
 			<AddComment />
+			<CommentList />
 		</div>
 	);
 }
