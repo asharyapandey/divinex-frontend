@@ -1,24 +1,17 @@
 import "./Card.scss";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router-dom";
 
 const Card = ({ post, isComments = false }) => {
 	const { userInfo } = useContext(UserContext);
-	const modal = useRef(null);
 
 	return (
 		<>
 			<div className="card">
 				<div className="card__header">
 					<div className="card__header--profile-picture">
-						<img
-							src={
-								post.user.profilePicture ||
-								"images/profile_picture/male_img.png"
-							}
-							alt=""
-						/>
+						<img src={"/" + post.user.profilePicture} alt="" />
 					</div>
 					<div className="card__header--username">
 						<a href={`/profile/${post.user._id}`}>
@@ -39,12 +32,12 @@ const Card = ({ post, isComments = false }) => {
 					)}
 				</div>
 				<div className="card__image">
-					<img src={post.image} alt="" />
+					<img src={"/" + post.image} alt="" />
 				</div>
 
 				<div className="card__footer">
 					<div className="card__footer--icons icon-comp">
-						<img src="images/heart.png" alt="" />
+						<img src="/images/heart.png" alt="" />
 					</div>
 					<div className="card__footer--caption">
 						<div className="username">
