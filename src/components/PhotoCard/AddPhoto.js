@@ -3,9 +3,15 @@ import "./AddPhoto.scss";
 import { privateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
 
-function AddPhoto({ modal }) {
-	const [caption, setCaption] = useState("");
-	const [image, setImage] = useState("images/mock_img.jpg");
+function AddPhoto({
+	modal,
+	cap = "",
+	img = "images/mock_img.jpg",
+	id = "",
+	edit = false,
+}) {
+	const [caption, setCaption] = useState(cap);
+	const [image, setImage] = useState("/" + img);
 	const [file, setFile] = useState();
 	const [error, setError] = useState("");
 
@@ -81,7 +87,7 @@ function AddPhoto({ modal }) {
 					</div>
 					<span className="error">{error}</span>
 					<button className="button" type="submit">
-						Add Post
+						{edit ? "Edit Post" : "Add Post"}
 					</button>
 				</form>
 			</div>

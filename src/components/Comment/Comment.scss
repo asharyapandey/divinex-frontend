@@ -57,7 +57,15 @@
 	}
 	&__details {
 		&--username {
-			font-weight: 600;
+			a {
+				font-weight: 600;
+				text-decoration: none;
+				color: black;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
 		}
 		&--comment {
 			padding-top: 0.5rem;

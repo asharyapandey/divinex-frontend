@@ -1,16 +1,20 @@
 import "./Card.scss";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router-dom";
+import Modal from "../Modal";
+import AddPhoto from "./AddPhoto";
 
 const Card = ({ post, isComments = false }) => {
 	const { userInfo } = useContext(UserContext);
+	const modal = useRef(null);
 	const getTime = () => {
 		const date = new Date(post.createdAt);
 		const dateNow = new Date();
 		const diffInTime = dateNow.getTime() - date.getTime();
 		return diffInTime / (1000 * 3600 * 24);
 	};
+	// Add Photo => cap = Caption
 
 	return (
 		<>
@@ -26,7 +30,10 @@ const Card = ({ post, isComments = false }) => {
 					</div>
 					{userInfo._id === post.user._id ? (
 						<div className="card__header--actions">
-							<button className="button button--action button--action-1">
+							<button
+								className="button button--action button--action-1"
+								onClick={() => modal.current.open()}
+							>
 								Edit
 							</button>
 							<button className="button button--action button--action-2">
@@ -69,6 +76,15 @@ const Card = ({ post, isComments = false }) => {
 						{Math.round(getTime())} days ago
 					</div>
 				</div>
+				<Modal ref={modal}>
+					<AddPhoto
+						modal={modal}
+						cap={post.caption}
+						img={post.image}
+						edit={true}
+						id={post._id}
+					/>
+				</Modal>
 			</div>
 		</>
 	);

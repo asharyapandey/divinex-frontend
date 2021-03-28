@@ -1,6 +1,10 @@
 import "./ProfileDetails.scss";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 const ProfileDetails = ({ user, postLength }) => {
+	const { userInfo } = useContext(UserContext);
+
 	return (
 		<div className="ProfileDetails">
 			<div className="ProfileDetails__image">
@@ -9,7 +13,13 @@ const ProfileDetails = ({ user, postLength }) => {
 
 			<div className="ProfileDetails__user-options">
 				<p className="username">{user.username}</p>
-				<button className="button edit-profile">Edit Profile</button>
+				{userInfo._id === user._id ? (
+					<button className="button edit-profile">
+						Edit Profile
+					</button>
+				) : (
+					<button className="button edit-profile">Follow</button>
+				)}
 			</div>
 
 			<div className="ProfileDetails__user-stats">
