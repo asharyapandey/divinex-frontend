@@ -110,7 +110,7 @@ function PostDetails({ match }) {
 		return (
 			<div className="PostDetails">
 				<div className="post">
-					<Card post={post} />
+					<Card post={post} setPost={(post) => setPost(post)} />
 				</div>
 				<p className="heading">Comments</p>
 				<CommentContainer>

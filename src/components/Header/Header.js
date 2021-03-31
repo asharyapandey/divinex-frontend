@@ -27,6 +27,10 @@ const Header = () => {
 		modal.current.open();
 	};
 
+	const closeModal = () => {
+		modal.current.close();
+	};
+
 	const classes = scrolled ? "container scrolled" : "container";
 
 	return (
@@ -68,7 +72,7 @@ const Header = () => {
 				</div>
 			</header>
 			<Modal ref={modal}>
-				<AddPhoto model={modal.current} />
+				<AddPhoto modal={modal.current.close} />
 			</Modal>
 		</div>
 	);

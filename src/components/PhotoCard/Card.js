@@ -1,11 +1,11 @@
 import "./Card.scss";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router-dom";
 import Modal from "../Modal";
 import AddPhoto from "./AddPhoto";
 
-const Card = ({ post, isComments = false }) => {
+const Card = ({ post, isComments = false, setPost = null }) => {
 	const { userInfo } = useContext(UserContext);
 	const modal = useRef(null);
 	const getTime = () => {
@@ -78,11 +78,12 @@ const Card = ({ post, isComments = false }) => {
 				</div>
 				<Modal ref={modal}>
 					<AddPhoto
-						modal={modal}
+						modal={modal.current.close}
 						cap={post.caption}
 						img={post.image}
 						edit={true}
 						id={post._id}
+						setPost={setPost}
 					/>
 				</Modal>
 			</div>

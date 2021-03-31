@@ -9,6 +9,7 @@ function AddPhoto({
 	img = "images/mock_img.jpg",
 	id = "",
 	edit = false,
+	setPost = null,
 }) {
 	const [caption, setCaption] = useState(cap);
 	const [image, setImage] = useState("/" + img);
@@ -34,19 +35,31 @@ function AddPhoto({
 				data.append("image", file);
 				data.append("caption", caption);
 
-				const response = await privateFetch.post("/api/post", data);
-				if (response.data.success) {
-					toast.success("Post Added");
-					modal.close();
+				if (edit) {
+					const response = await privateFetch.put(
+						`/api/post/${id}`,
+						data
+					);
+					if (response.data.success) {
+						toast.success("Post Updated");
+						setPost(response.data.post);
+						modal();
+					}
+				} else {
+					const response = await privateFetch.post("/api/post", data);
+					if (response.data.success) {
+						toast.success("Post Added");
+						modal();
+					}
 				}
 			} catch (error) {
-				console.log(error);
+				console.log(error.response);
 				toast.error("Something went wrong");
 			}
 		}
 	};
 	const validate = () => {
-		if (file.name) {
+		if (file) {
 			setError("");
 		} else {
 			setError("Please Select a file");
