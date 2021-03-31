@@ -72,7 +72,7 @@ const Header = () => {
 				</div>
 			</header>
 			<Modal ref={modal}>
-				<AddPhoto modal={modal.current.close} />
+				<AddPhoto modal={closeModal} />
 			</Modal>
 		</div>
 	);
