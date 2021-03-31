@@ -1,5 +1,5 @@
 import "./Card.scss";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { Link, useHistory } from "react-router-dom";
 import Modal from "../Modal";
@@ -11,6 +11,8 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 	const { userInfo } = useContext(UserContext);
 	const history = useHistory();
 	const modal = useRef(null);
+	const [isLiked, setIsLikes] = useState(false);
+
 	const getTime = () => {
 		const date = new Date(post.createdAt);
 		const dateNow = new Date();
@@ -29,6 +31,44 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 		} catch (error) {
 			console.log(error);
 			toast.error("Could not delete the post");
+		}
+	};
+	useEffect(() => {
+		const likes = post.like;
+		let flag = false;
+		likes.forEach((like) => {
+			if (like.user === userInfo._id) flag = true;
+		});
+		setIsLikes(flag);
+	}, []);
+
+	const triggerLikes = async () => {
+		// the function is responsible for liking and unliking
+		try {
+			if (isLiked) {
+				// unliking
+				const response = await privateFetch.delete(
+					`/api/post/unlike/${post._id}`
+				);
+				if (response.data.success) {
+					toast.error("Unliked");
+					setPost(response.data.post);
+					setIsLikes(false);
+				}
+			} else {
+				//liking
+				const response = await privateFetch.post(
+					`/api/post/like/${post._id}`
+				);
+				if (response.data.success) {
+					toast.error("liked");
+					setPost(response.data.post);
+					setIsLikes(true);
+				}
+			}
+		} catch (error) {
+			console.log(error);
+			toast.error("couldnot like/unlike post");
 		}
 	};
 
@@ -70,8 +110,21 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 				</div>
 
 				<div className="card__footer">
-					<div className="card__footer--icons icon-comp">
-						<img src="/images/heart.png" alt="" />
+					<div
+						className="card__footer--icons icon-comp"
+						onClick={triggerLikes}
+					>
+						<img
+							src={
+								isLiked
+									? "/images/heart_filled.png"
+									: "/images/heart.png"
+							}
+							alt=""
+						/>
+					</div>
+					<div className="card__footer--likes">
+						{post.like.length} likes
 					</div>
 					<div className="card__footer--caption">
 						<div className="username">

@@ -17,6 +17,17 @@ function CardList() {
 			});
 		}
 	};
+	useEffect(() => console.log("changed"), [feed]);
+
+	const changedSinglePost = (changedPost) => {
+		// for updating single post
+		const newFeed = [...feed];
+		const postIndex = newFeed.findIndex(
+			(post) => post._id === changedPost._id
+		);
+		newFeed[postIndex] = { ...changedPost };
+		setFeed(newFeed);
+	};
 
 	useEffect(() => {
 		getFeed();
@@ -25,7 +36,12 @@ function CardList() {
 	return (
 		<div>
 			{feed.map((post) => (
-				<Card key={post._id} post={post} isComments={true} />
+				<Card
+					key={post._id}
+					post={post}
+					isComments={true}
+					setPost={changedSinglePost}
+				/>
 			))}
 		</div>
 	);
