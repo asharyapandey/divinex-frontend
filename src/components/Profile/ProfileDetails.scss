@@ -71,8 +71,8 @@
 			font-weight: 700;
 			padding: 1rem;
 		}
-		.edit-profile {
-			width: 75%;
+		.user-actions {
+			display: flex;
 		}
 		@media only screen and (min-width: 700px) {
 			grid-row: span 1 / auto;

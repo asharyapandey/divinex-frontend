@@ -54,9 +54,12 @@ const ProfileDetails = ({ user, postLength }) => {
 			<div className="ProfileDetails__user-options">
 				<p className="username">{user.username}</p>
 				{userInfo._id === user._id ? (
-					<button className="button edit-profile">
-						Edit Profile
-					</button>
+					<div className="user-action">
+						<button className="button edit-profile">
+							Edit Profile
+						</button>
+						<button className="button edit-profile">Logout</button>
+					</div>
 				) : doesFollow() ? (
 					<button className="button edit-profile" onClick={unFollow}>
 						Unfollow
