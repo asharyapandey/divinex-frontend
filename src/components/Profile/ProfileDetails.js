@@ -3,9 +3,11 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { toast } from "react-toastify";
 import { privateFetch } from "../../utils/fetch";
+import { useHistory } from "react-router";
 
 const ProfileDetails = ({ user, postLength }) => {
-	const { userInfo, setUser } = useContext(UserContext);
+	const { userInfo, setUser, logout } = useContext(UserContext);
+	const history = useHistory();
 
 	const doesFollow = () => {
 		const following = userInfo.following;
@@ -55,10 +57,20 @@ const ProfileDetails = ({ user, postLength }) => {
 				<p className="username">{user.username}</p>
 				{userInfo._id === user._id ? (
 					<div className="user-action">
-						<button className="button edit-profile">
+						<button
+							className="button edit-profile"
+							onClick={() =>
+								history.push(`/editprofile/${user._id}`)
+							}
+						>
 							Edit Profile
 						</button>
-						<button className="button edit-profile">Logout</button>
+						<button
+							className="button logout"
+							onCLick={() => logout()}
+						>
+							Logout
+						</button>
 					</div>
 				) : doesFollow() ? (
 					<button className="button edit-profile" onClick={unFollow}>

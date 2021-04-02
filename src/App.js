@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage";
 import Notification from "./pages/Notification";
 import PostDetails from "./pages/PostDetails";
+import EditProfilePage from "./pages/EditProfilePage";
 
 const App = () => {
 	const { isAuth } = useContext(UserContext);
@@ -54,6 +55,11 @@ const PrivateRoutes = () => {
 						exact
 						path="/profile/:userID"
 						component={ProfilePage}
+					/>
+					<Route
+						exact
+						path="/editprofile/:userID"
+						component={EditProfilePage}
 					/>
 					<Route exact path="/post/:postID" component={PostDetails} />
 					<Route
