@@ -25,6 +25,8 @@ const App = () => {
 	const { isAuth } = useContext(UserContext);
 	return (
 		<Router>
+			{console.log(isAuth())}
+
 			{isAuth() ? <PrivateRoutes /> : <PublicRoutes />}
 			<ToastContainer position="top-center" />
 		</Router>

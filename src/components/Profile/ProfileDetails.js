@@ -67,7 +67,7 @@ const ProfileDetails = ({ user, postLength }) => {
 						</button>
 						<button
 							className="button logout"
-							onCLick={() => logout()}
+							onClick={() => logout()}
 						>
 							Logout
 						</button>

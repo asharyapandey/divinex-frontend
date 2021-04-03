@@ -1,9 +1,12 @@
 import CardList from "../components/PhotoCard/CardList";
+import UserList from "../components/UserList";
+import "./Home.scss";
 
 const Home = () => {
 	return (
-		<div>
+		<div className="Home">
 			<CardList />
+			<UserList />
 		</div>
 	);
 };

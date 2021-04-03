@@ -10,13 +10,7 @@ function User({ user }) {
 			style={{ cursor: "pointer" }}
 		>
 			<div className="User__image">
-				<img
-					src={
-						user.profilePicture ||
-						"/images/profile_picture/male_img.png"
-					}
-					alt="Profile "
-				/>
+				<img src={"/" + user.profilePicture} alt="Profile " />
 			</div>
 			<div className="User__username">{user.username}</div>
 		</div>
