@@ -40,13 +40,13 @@ function Login() {
 					"/api/user/login",
 					data
 				);
-				console.log(response);
 				setUser(response.data.token, response.data.user);
 				toast.success("Login Successful", {
 					position: "top-center",
 				});
 				// go to login
 				history.replace("/");
+				window.location.reload();
 			} catch (error) {
 				console.log(error.response);
 				toast.error(error.response.data.error, {

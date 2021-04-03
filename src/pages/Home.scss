@@ -1,0 +1,50 @@
+.UserList {
+	width: 275px;
+	margin-top: 0.5rem;
+
+	p {
+		font-weight: 500;
+		margin-bottom: 0.5rem;
+	}
+
+	span {
+		font-size: 0.8rem;
+		color: grey;
+	}
+
+	@media only screen and (max-width: 840px) {
+		display: none;
+	}
+
+	.user {
+		display: flex;
+		align-items: center;
+		padding: 0.5rem;
+
+		.image {
+			img {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+			}
+		}
+		.username {
+			font-size: 1.1rem;
+			margin-left: 0.8rem;
+
+			a {
+				text-decoration: none;
+				color: #000;
+				font-weight: 500;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.Home {
+	display: flex;
+	justify-content: space-between;
+}

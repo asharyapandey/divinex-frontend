@@ -71,8 +71,25 @@
 			font-weight: 700;
 			padding: 1rem;
 		}
-		.edit-profile {
-			width: 75%;
+		.user-action {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			button {
+				display: block;
+				width: 40%;
+				margin-top: 0.5rem;
+			}
+			.logout {
+				background-color: grey;
+			}
+			@media only screen and (min-width: 700px) {
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+				justify-content: space-evenly;
+			}
 		}
 		@media only screen and (min-width: 700px) {
 			grid-row: span 1 / auto;

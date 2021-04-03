@@ -3,9 +3,16 @@ import "./AddPhoto.scss";
 import { privateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
 
-function AddPhoto({ modal }) {
-	const [caption, setCaption] = useState("");
-	const [image, setImage] = useState("images/mock_img.jpg");
+function AddPhoto({
+	modal,
+	cap = "",
+	img = "images/mock_img.jpg",
+	id = "",
+	edit = false,
+	setPost = null,
+}) {
+	const [caption, setCaption] = useState(cap);
+	const [image, setImage] = useState("/" + img);
 	const [file, setFile] = useState();
 	const [error, setError] = useState("");
 
@@ -28,19 +35,31 @@ function AddPhoto({ modal }) {
 				data.append("image", file);
 				data.append("caption", caption);
 
-				const response = await privateFetch.post("/api/post", data);
-				if (response.data.success) {
-					toast.success("Post Added");
-					modal.close();
+				if (edit) {
+					const response = await privateFetch.put(
+						`/api/post/${id}`,
+						data
+					);
+					if (response.data.success) {
+						toast.success("Post Updated");
+						setPost(response.data.post);
+						modal();
+					}
+				} else {
+					const response = await privateFetch.post("/api/post", data);
+					if (response.data.success) {
+						toast.success("Post Added");
+						modal();
+					}
 				}
 			} catch (error) {
-				console.log(error);
+				console.log(error.response);
 				toast.error("Something went wrong");
 			}
 		}
 	};
 	const validate = () => {
-		if (file.name) {
+		if (file) {
 			setError("");
 		} else {
 			setError("Please Select a file");
@@ -81,7 +100,7 @@ function AddPhoto({ modal }) {
 					</div>
 					<span className="error">{error}</span>
 					<button className="button" type="submit">
-						Add Post
+						{edit ? "Edit Post" : "Add Post"}
 					</button>
 				</form>
 			</div>

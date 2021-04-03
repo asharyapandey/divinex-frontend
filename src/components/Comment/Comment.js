@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Comment = ({ comment, deleteComment, setID, setComment }) => {
 	const getTime = () => {
 		const date = new Date(comment.commentedAt);
@@ -16,7 +18,9 @@ const Comment = ({ comment, deleteComment, setID, setComment }) => {
 			</div>
 			<div className="Comment__details">
 				<div className="Comment__details--username">
-					{comment.commentedBy.username}
+					<Link to={`/profile/${comment.commentedBy._id}`}>
+						{comment.commentedBy.username}
+					</Link>
 				</div>
 				<div className="Comment__details--comment">
 					{comment.comment}

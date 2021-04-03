@@ -1,0 +1,21 @@
+.edit-profile {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	.holder {
+		width: 500px;
+		margin: 2rem 0;
+		padding: 1rem;
+		background-color: #fff;
+		border-radius: 5px;
+	}
+
+	&__image {
+		text-align: center;
+		margin: 1rem;
+		img {
+			width: 200px;
+		}
+	}
+}
