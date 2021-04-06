@@ -1,22 +1,33 @@
 import "./ProfileDetails.scss";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { toast } from "react-toastify";
 import { privateFetch } from "../../utils/fetch";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 
-const ProfileDetails = ({ user, postLength }) => {
-	const { userInfo, setUser, logout } = useContext(UserContext);
+const ProfileDetails = ({ user, postLength, setUser }) => {
+	const { userInfo, setUserData, logout } = useContext(UserContext);
 	const history = useHistory();
+	const [df, setDf] = useState(false);
+	const params = useParams();
+	const userID = params.userID;
 
 	const doesFollow = () => {
 		const following = userInfo.following;
 		let flag = false;
 		following.forEach((follow) => {
-			if (follow._id === user._id) flag = true;
+			if (follow._id === userID) flag = true;
 		});
 		return flag;
 	};
+
+	useEffect(() => {
+		const d = doesFollow();
+		setDf(d);
+	}, []);
+	useEffect(() => {
+		console.log(df);
+	}, [df]);
 
 	const follow = async () => {
 		try {
@@ -25,7 +36,9 @@ const ProfileDetails = ({ user, postLength }) => {
 			);
 			if (response.data.success) {
 				toast.success("Followed User");
-				setUser(response.data.user);
+				setUserData(response.data.user);
+				setDf(true);
+				setUser(response.data.followedUser);
 			}
 		} catch (error) {
 			console.log(error);
@@ -34,12 +47,15 @@ const ProfileDetails = ({ user, postLength }) => {
 	};
 	const unFollow = async () => {
 		try {
+			console.log(user._id);
 			const response = await privateFetch.delete(
 				`/api/user/unfollow/${user._id}`
 			);
 			if (response.data.success) {
 				toast.success("Unfollowed User");
-				setUser(response.data.user);
+				setUserData(response.data.user);
+				setDf(false);
+				setUser(response.data.unFollowedUser);
 			}
 		} catch (error) {
 			console.log(error);
@@ -72,7 +88,7 @@ const ProfileDetails = ({ user, postLength }) => {
 							Logout
 						</button>
 					</div>
-				) : doesFollow() ? (
+				) : df ? (
 					<button className="button edit-profile" onClick={unFollow}>
 						Unfollow
 					</button>
