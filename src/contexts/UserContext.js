@@ -22,6 +22,12 @@ const UserProvider = ({ children }) => {
 		setUserInfo(userInfo1);
 	};
 
+	const setUserData = (userInfo) => {
+		localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
+		setUserInfo(userInfo);
+	};
+
 	const logout = () => {
 		localStorage.removeItem("token");
 		localStorage.removeItem("userInfo");
@@ -32,7 +38,7 @@ const UserProvider = ({ children }) => {
 
 	return (
 		<UserContext.Provider
-			value={{ token, setUser, logout, userInfo, isAuth }}
+			value={{ token, setUser, logout, userInfo, isAuth, setUserData }}
 		>
 			{children}
 		</UserContext.Provider>

@@ -34,7 +34,7 @@ const UserList = () => {
 			<p>Suggested Users For You</p>
 			{users.map((user) => {
 				return (
-					<div className="user">
+					<div className="user" key={user._id}>
 						<div className="image">
 							<img src={"/" + user.profilePicture} alt="" />
 						</div>

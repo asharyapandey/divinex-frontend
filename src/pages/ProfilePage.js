@@ -37,7 +37,11 @@ const ProfilePage = ({ match }) => {
 
 	return (
 		<>
-			<ProfileDetails user={user} postLength={posts.length} />
+			<ProfileDetails
+				user={user}
+				postLength={posts.length}
+				setUser={(user) => setUser(user)}
+			/>
 			<hr />
 			<Gallery photos={posts} />
 		</>
