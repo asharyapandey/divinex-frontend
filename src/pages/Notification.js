@@ -5,15 +5,14 @@ import { privateFetch } from "../utils/fetch";
 import "./Notification.scss";
 
 function Notification() {
-	const [user, setUser] = useState({});
+	const [notifications, setNotifications] = useState([]);
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		setLoading(true);
 		privateFetch
-			.get("/api/user")
+			.get("/api/user/notification")
 			.then((response) => {
-				console.log(response);
-				setUser(response.data.user);
+				setNotifications(response.data.notifications);
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -23,6 +22,19 @@ function Notification() {
 			});
 	}, []);
 
+	const deleteNotification = async (id) => {
+		try {
+			const response = await privateFetch.delete(
+				`/api/user/notification/${id}`
+			);
+			setNotifications(response.data.notifications);
+			toast.success("Notification Deleted");
+		} catch (error) {
+			console.log(error);
+			toast.error("Could not Delete Notification");
+		}
+	};
+
 	if (loading) {
 		return <img src="/images/loading.gif" alt="fetching data" />;
 	}
@@ -30,12 +42,14 @@ function Notification() {
 	return (
 		<div className="Notification">
 			<div className="NotificationList">
-				{user.notification.map((noti) => {
+				{notifications.map((noti) => {
 					return (
 						<SingleNotification
 							user={noti.user}
 							key={noti._id}
 							action={noti.action}
+							deleteNotification={deleteNotification}
+							id={noti._id}
 						/>
 					);
 				})}
@@ -44,13 +58,22 @@ function Notification() {
 	);
 }
 
-const SingleNotification = ({ user, action }) => {
+const SingleNotification = ({ user, action, deleteNotification, id }) => {
 	if (action === "Follow") {
 		return (
 			<div className="SingleNotification">
 				<img src={"/" + user.profilePicture} alt="" />
 				<Link to={`/profile/${user._id}`}>{user.username}</Link>
 				<span>started following you.</span>
+
+				<div className="actions">
+					<button
+						className="delete-noti"
+						onClick={() => deleteNotification(id)}
+					>
+						Delete
+					</button>
+				</div>
 			</div>
 		);
 	} else {

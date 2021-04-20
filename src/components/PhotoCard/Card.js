@@ -40,6 +40,7 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 			if (like.user === userInfo._id) flag = true;
 		});
 		setIsLikes(flag);
+		// eslint-disable-next-line
 	}, []);
 
 	const triggerLikes = async () => {

@@ -24,10 +24,8 @@ const ProfileDetails = ({ user, postLength, setUser }) => {
 	useEffect(() => {
 		const d = doesFollow();
 		setDf(d);
+		// eslint-disable-next-line
 	}, []);
-	useEffect(() => {
-		console.log(df);
-	}, [df]);
 
 	const follow = async () => {
 		try {
@@ -35,7 +33,6 @@ const ProfileDetails = ({ user, postLength, setUser }) => {
 				`/api/user/follow/${user._id}`
 			);
 			if (response.data.success) {
-				toast.success("Followed User");
 				setUserData(response.data.user);
 				setDf(true);
 				setUser(response.data.followedUser);
@@ -52,7 +49,6 @@ const ProfileDetails = ({ user, postLength, setUser }) => {
 				`/api/user/unfollow/${user._id}`
 			);
 			if (response.data.success) {
-				toast.success("Unfollowed User");
 				setUserData(response.data.user);
 				setDf(false);
 				setUser(response.data.unFollowedUser);

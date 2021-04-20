@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import { privateFetch } from "../utils/fetch";
@@ -38,6 +38,7 @@ const EditProfilePage = ({ match }) => {
 	};
 	useEffect(() => {
 		getUser();
+		// eslint-disable-next-line
 	}, []);
 
 	const handleSubmit = async (e) => {

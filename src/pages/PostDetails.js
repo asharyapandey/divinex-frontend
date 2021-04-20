@@ -20,7 +20,6 @@ function PostDetails({ match }) {
 			const response = await privateFetch.get(
 				`/api/post/${match.params.postID}`
 			);
-			console.log(response);
 			setPost(response.data.post);
 			setLoading(false);
 		} catch (error) {
@@ -37,7 +36,7 @@ function PostDetails({ match }) {
 				`/api/post/comment/${match.params.postID}`
 			);
 			console.log(response);
-			setComments(response.data.comments);
+			setComments(response.data.comments.reverse());
 		} catch (error) {
 			console.log(error);
 			toast.error("Some Kind of error occured");
@@ -47,6 +46,7 @@ function PostDetails({ match }) {
 	useEffect(() => {
 		getFeed();
 		getComments();
+		// eslint-disable-next-line
 	}, []);
 
 	const addComment = async () => {
@@ -55,10 +55,9 @@ function PostDetails({ match }) {
 				`/api/post/comment/${match.params.postID}`,
 				{ comment }
 			);
-			console.log(response);
-			const newComments = [...comments];
-			newComments.push(response.data.comment);
+			const newComments = [response.data.comment, ...comments];
 			setComments(newComments);
+			setComment("");
 			toast.success("Comment added");
 		} catch (error) {
 			console.log(error);
@@ -67,13 +66,9 @@ function PostDetails({ match }) {
 	};
 	const editComment = async () => {
 		try {
-			const response = await privateFetch.put(
-				`/api/post/comment/${action}`,
-				{
-					comment,
-				}
-			);
-			console.log(response);
+			await privateFetch.put(`/api/post/comment/${action}`, {
+				comment,
+			});
 			let newComments = [...comments];
 			let commentIndex = newComments.findIndex(
 				(comment) => comment._id === action
@@ -81,6 +76,7 @@ function PostDetails({ match }) {
 			newComments[commentIndex].comment = comment;
 			setComments(newComments);
 			setAction("");
+			setComment("");
 			toast.success("Comment Edited");
 		} catch (error) {
 			console.log(error);

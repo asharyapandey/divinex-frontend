@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileDetails from "../components/Profile/ProfileDetails";
 import Gallery from "../components/Gallery/Gallery";
 import { toast } from "react-toastify";
@@ -33,6 +33,7 @@ const ProfilePage = ({ match }) => {
 	useEffect(() => {
 		getUser();
 		getPosts();
+		// eslint-disable-next-line
 	}, []);
 
 	return (
