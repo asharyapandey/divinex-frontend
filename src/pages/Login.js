@@ -48,8 +48,8 @@ function Login() {
 				history.replace("/");
 				window.location.reload();
 			} catch (error) {
-				console.log(error.response);
-				toast.error(error.response.data.error, {
+				console.log(error);
+				toast.error("Some kind of error occured", {
 					position: "top-center",
 				});
 			}
