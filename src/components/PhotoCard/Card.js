@@ -52,7 +52,6 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 					`/api/post/unlike/${post._id}`
 				);
 				if (response.data.success) {
-					toast.error("Unliked");
 					setPost(response.data.post);
 					setIsLikes(false);
 				}
@@ -62,7 +61,6 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 					`/api/post/like/${post._id}`
 				);
 				if (response.data.success) {
-					toast.error("liked");
 					setPost(response.data.post);
 					setIsLikes(true);
 				}
