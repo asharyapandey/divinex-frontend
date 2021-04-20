@@ -3,6 +3,7 @@ import "./Auth.scss";
 import RegisterImage from "./register.jpg";
 import { Link, useHistory } from "react-router-dom";
 import { publicFetch } from "../utils/fetch";
+import { toast } from "react-toastify";
 
 function Register() {
 	const [username, setUsername] = useState("");
@@ -55,7 +56,11 @@ function Register() {
 		if (validate()) {
 			const data = { username, email, gender, password };
 			try {
-				await publicFetch.post("/api/user", data);
+				const response = await publicFetch.post("/api/user", data);
+
+				if (response.data.success) {
+					toast.success("User Registered");
+				}
 				// go to login
 				history.push("/login");
 			} catch (error) {
