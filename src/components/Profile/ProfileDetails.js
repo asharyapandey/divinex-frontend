@@ -22,6 +22,7 @@ const ProfileDetails = ({ user, postLength, setUser }) => {
 	};
 
 	useEffect(() => {
+		console.log(userInfo);
 		const d = doesFollow();
 		setDf(d);
 		// eslint-disable-next-line

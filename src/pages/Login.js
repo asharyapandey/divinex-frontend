@@ -49,7 +49,7 @@ function Login() {
 				window.location.reload();
 			} catch (error) {
 				console.log(error);
-				toast.error("Some kind of error occured", {
+				toast.error("Please Check Credentials and try again", {
 					position: "top-center",
 				});
 			}

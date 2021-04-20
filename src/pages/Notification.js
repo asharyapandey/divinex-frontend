@@ -42,17 +42,19 @@ function Notification() {
 	return (
 		<div className="Notification">
 			<div className="NotificationList">
-				{notifications.map((noti) => {
-					return (
-						<SingleNotification
-							user={noti.user}
-							key={noti._id}
-							action={noti.action}
-							deleteNotification={deleteNotification}
-							id={noti._id}
-						/>
-					);
-				})}
+				{notifications
+					? notifications.map((noti) => {
+							return (
+								<SingleNotification
+									user={noti.user}
+									key={noti._id}
+									action={noti.action}
+									deleteNotification={deleteNotification}
+									id={noti._id}
+								/>
+							);
+					  })
+					: ""}
 			</div>
 		</div>
 	);
