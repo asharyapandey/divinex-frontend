@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 
 const Comment = ({ comment, deleteComment, setID, setComment }) => {
+	const { userInfo } = useContext(UserContext);
+
 	const getTime = () => {
 		const date = new Date(comment.commentedAt);
 		const dateNow = new Date();
@@ -29,24 +33,27 @@ const Comment = ({ comment, deleteComment, setID, setComment }) => {
 					{Math.round(getTime())} days ago
 				</div>
 			</div>
-			<div className="Comment__actions">
-				<button
-					className="button-edit"
-					onClick={() => {
-						setID(comment._id);
-						setComment(comment.comment);
-					}}
-				>
-					Edit
-				</button>
-				<button
-					className="button-delete"
-					onClick={() => deleteComment(comment._id)}
-				>
-					Delete
-				</button>
-			</div>
-			<hr />
+			{userInfo._id === comment.commentedBy._id ? (
+				<div className="Comment__actions">
+					<button
+						className="button-edit"
+						onClick={() => {
+							setID(comment._id);
+							setComment(comment.comment);
+						}}
+					>
+						Edit
+					</button>
+					<button
+						className="button-delete"
+						onClick={() => deleteComment(comment._id)}
+					>
+						Delete
+					</button>
+				</div>
+			) : (
+				""
+			)}
 		</div>
 	);
 };
