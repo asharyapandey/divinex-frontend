@@ -23,6 +23,11 @@
 				width: 200px;
 				height: 200px;
 			}
+
+			@media only screen and (min-width: 500px) {
+				width: 150px;
+				height: 150px;
+			}
 		}
 	}
 
@@ -70,6 +75,9 @@
 			font-size: 2rem;
 			font-weight: 700;
 			padding: 1rem;
+			@media only screen and (min-width: 500px) {
+				font-size: 1.5rem;
+			}
 		}
 		.user-action {
 			display: flex;
