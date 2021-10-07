@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useSelector } from "react-redux";
 
 function AddComment({ addComment, editComment, comment, setComment, action }) {
-	const { userInfo } = useContext(UserContext);
+	const { user: userInfo } = useSelector((state) => state.user);
 
 	const onSubmit = (e) => {
 		e.preventDefault();

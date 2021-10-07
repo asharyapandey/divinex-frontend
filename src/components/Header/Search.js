@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import "./Search.scss";
-import { privateFetch } from "../../utils/fetch";
+import { getPrivateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
 import User from "../User";
+import { useSelector } from "react-redux";
 
 const Search = () => {
 	const [showResults, setShowResults] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
 
+	const userState = useSelector((state) => state.user);
 	const ref = useRef(null);
 
 	const handleChange = async (e) => {
@@ -16,6 +18,7 @@ const Search = () => {
 		setShowResults(true);
 		setSearchTerm(e.target.value);
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.get(
 				`/api/user/search/?term=${searchTerm}`
 			);

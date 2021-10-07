@@ -3,16 +3,16 @@ import "./Auth.scss";
 import LoginImage from "./login.jpg";
 import { Link, useHistory } from "react-router-dom";
 import { publicFetch } from "../utils/fetch";
-import { UserContext } from "../contexts/UserContext";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/slices/user.slice";
 
 function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [usernameError, setUsernameError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
-
-	const { setUser } = useContext(UserContext);
+	const dispatch = useDispatch();
 
 	const history = useHistory();
 	const validate = () => {
@@ -40,13 +40,16 @@ function Login() {
 					"/api/user/login",
 					data
 				);
-				setUser(response.data.token, response.data.user);
+				dispatch(
+					setUser({
+						token: response.data.token,
+						user: response.data.user,
+					})
+				);
 				toast.success("Login Successful", {
 					position: "top-center",
 				});
 				// go to login
-				history.replace("/");
-				window.location.reload();
 			} catch (error) {
 				console.log(error);
 				toast.error("Please Check Credentials and try again", {

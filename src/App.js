@@ -9,9 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
-
-import { UserContext } from "./contexts/UserContext";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 
 // for toast
 import { ToastContainer } from "react-toastify";
@@ -22,10 +20,10 @@ import PostDetails from "./pages/PostDetails";
 import EditProfilePage from "./pages/EditProfilePage";
 
 const App = () => {
-	const { isAuth } = useContext(UserContext);
+	const userState = useSelector((state) => state.user);
 	return (
 		<Router>
-			{isAuth() ? <PrivateRoutes /> : <PublicRoutes />}
+			{userState.token !== "" ? <PrivateRoutes /> : <PublicRoutes />}
 			<ToastContainer position="top-center" />
 		</Router>
 	);

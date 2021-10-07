@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext";
+import { useSelector } from "react-redux";
 
 const Comment = ({ comment, deleteComment, setID, setComment }) => {
-	const { userInfo } = useContext(UserContext);
+	const { user: userInfo } = useSelector((state) => state.user);
 
 	const getTime = () => {
 		const date = new Date(comment.commentedAt);

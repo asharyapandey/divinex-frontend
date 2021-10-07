@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 import ProfileDetails from "../components/Profile/ProfileDetails";
 import Gallery from "../components/Gallery/Gallery";
 import { toast } from "react-toastify";
-import { privateFetch } from "../utils/fetch";
+import { getPrivateFetch } from "../utils/fetch";
+import { useSelector } from "react-redux";
 
 const ProfilePage = ({ match }) => {
 	const [user, setUser] = useState({});
 	const [posts, setPosts] = useState([]);
+	const userState = useSelector((state) => state.user);
 
 	const getUser = async () => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const respose = await privateFetch.get(
 				`/api/user/${match.params.userID}`
 			);
@@ -21,6 +24,7 @@ const ProfilePage = ({ match }) => {
 	};
 	const getPosts = async () => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const respose = await privateFetch.get(
 				`/api/post/user/${match.params.userID}`
 			);

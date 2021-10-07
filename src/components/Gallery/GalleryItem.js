@@ -1,5 +1,6 @@
 import "./GalleryItem.scss";
 import { useHistory } from "react-router-dom";
+import BASE_URL from "../../utils/baseUrl";
 
 function GalleryItem({ span, post }) {
 	const history = useHistory();
@@ -7,7 +8,7 @@ function GalleryItem({ span, post }) {
 	return (
 		<div className={classes}>
 			<div className="GalleryItem__image">
-				<img src={"/" + post.image} alt="" />
+				<img src={BASE_URL + "/" + post.image} alt="" />
 			</div>
 			<div
 				className="GalleryItem__info"

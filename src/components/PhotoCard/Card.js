@@ -1,17 +1,18 @@
 import "./Card.scss";
-import { useContext, useEffect, useRef, useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Modal from "../Modal";
 import AddPhoto from "./AddPhoto";
 import { toast } from "react-toastify";
-import { privateFetch } from "../../utils/fetch";
+import { getPrivateFetch } from "../../utils/fetch";
+import { useSelector } from "react-redux";
+import BASE_URL from "../../utils/baseUrl";
 
 const Card = ({ post, isComments = false, setPost = null }) => {
-	const { userInfo } = useContext(UserContext);
 	const history = useHistory();
 	const modal = useRef(null);
 	const [isLiked, setIsLikes] = useState(false);
+	const userState = useSelector((state) => state.user);
 
 	const getTime = () => {
 		const date = new Date(post.createdAt);
@@ -23,6 +24,7 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 
 	const deletePost = async () => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.delete(`/api/post/${post._id}`);
 			if (response.data.success) {
 				toast.success("Post Deleted");
@@ -37,7 +39,7 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 		const likes = post.like;
 		let flag = false;
 		likes.forEach((like) => {
-			if (like.user === userInfo._id) flag = true;
+			if (like.user === userState.user._id) flag = true;
 		});
 		setIsLikes(flag);
 		// eslint-disable-next-line
@@ -48,6 +50,8 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 		try {
 			if (isLiked) {
 				// unliking
+
+				const privateFetch = getPrivateFetch(userState.token);
 				const response = await privateFetch.delete(
 					`/api/post/unlike/${post._id}`
 				);
@@ -57,6 +61,7 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 				}
 			} else {
 				//liking
+				const privateFetch = getPrivateFetch(userState.token);
 				const response = await privateFetch.post(
 					`/api/post/like/${post._id}`
 				);
@@ -67,25 +72,27 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 			}
 		} catch (error) {
 			console.log(error);
-			toast.error("couldnot like/unlike post");
+			toast.error("couldn't like/unlike post");
 		}
 	};
 
 	const closeModal = () => modal.current.close();
-
 	return (
 		<>
 			<div className="card">
 				<div className="card__header">
 					<div className="card__header--profile-picture">
-						<img src={"/" + post.user.profilePicture} alt="" />
+						<img
+							src={BASE_URL + "/" + post.user.profilePicture}
+							alt=""
+						/>
 					</div>
 					<div className="card__header--username">
 						<a href={`/profile/${post.user._id}`}>
 							{post.user.username}
 						</a>
 					</div>
-					{userInfo._id === post.user._id ? (
+					{userState.user._id === post.user._id ? (
 						<div className="card__header--actions">
 							<button
 								className="button button--action button--action-1"
@@ -105,7 +112,7 @@ const Card = ({ post, isComments = false, setPost = null }) => {
 					)}
 				</div>
 				<div className="card__image">
-					<img src={"/" + post.image} alt="" />
+					<img src={BASE_URL + "/" + post.image} alt="" />
 				</div>
 
 				<div className="card__footer">

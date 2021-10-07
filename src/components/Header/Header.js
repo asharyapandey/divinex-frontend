@@ -1,14 +1,14 @@
 import Icon from "./Icon";
 import "./Header.scss";
 import Search from "./Search";
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "../Modal";
 import AddPhoto from "../PhotoCard/AddPhoto";
-import { UserContext } from "../../contexts/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
 	const [scrolled, setScrolled] = useState(false);
-	const { userInfo } = useContext(UserContext);
+	const { user: userInfo } = useSelector((state) => state.user);
 	const modal = useRef(null);
 
 	const handleScroll = () => {

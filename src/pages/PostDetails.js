@@ -3,9 +3,10 @@ import "./PostDetails.scss";
 import { toast } from "react-toastify";
 import CommentContainer from "../components/Comment/CommentContainer";
 import Card from "../components/PhotoCard/Card";
-import { privateFetch } from "../utils/fetch";
+import { getPrivateFetch } from "../utils/fetch";
 import AddComment from "../components/Comment/AddComment";
 import CommentList from "../components/Comment/CommentList";
+import { useSelector } from "react-redux";
 
 function PostDetails({ match }) {
 	const [post, setPost] = useState({});
@@ -14,9 +15,13 @@ function PostDetails({ match }) {
 	// stores id of comment to be edited
 	const [action, setAction] = useState("");
 	const [comment, setComment] = useState("");
+
+	const userState = useSelector((state) => state.user);
+
 	const getFeed = async () => {
 		try {
 			setLoading(true);
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.get(
 				`/api/post/${match.params.postID}`
 			);
@@ -32,6 +37,7 @@ function PostDetails({ match }) {
 
 	const getComments = async () => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.get(
 				`/api/post/comment/${match.params.postID}`
 			);
@@ -51,6 +57,7 @@ function PostDetails({ match }) {
 
 	const addComment = async () => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.post(
 				`/api/post/comment/${match.params.postID}`,
 				{ comment }
@@ -66,6 +73,7 @@ function PostDetails({ match }) {
 	};
 	const editComment = async () => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			await privateFetch.put(`/api/post/comment/${action}`, {
 				comment,
 			});
@@ -86,6 +94,7 @@ function PostDetails({ match }) {
 
 	const deleteComment = async (id) => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.delete(
 				`/api/post/comment/${id}`
 			);

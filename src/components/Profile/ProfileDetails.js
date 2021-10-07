@@ -1,16 +1,19 @@
 import "./ProfileDetails.scss";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { privateFetch } from "../../utils/fetch";
+import { getPrivateFetch } from "../../utils/fetch";
 import { useHistory, useParams } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { removeToken, updateUser } from "../../redux/slices/user.slice";
+import BASE_URL from "../../utils/baseUrl";
 
 const ProfileDetails = ({ user, postLength, setUser }) => {
-	const { userInfo, setUserData, logout } = useContext(UserContext);
 	const history = useHistory();
 	const [df, setDf] = useState(false);
 	const params = useParams();
+	const { user: userInfo, token } = useSelector((state) => state.user);
 	const userID = params.userID;
+	const dispatch = useDispatch();
 
 	const doesFollow = () => {
 		const following = userInfo.following;
@@ -30,11 +33,12 @@ const ProfileDetails = ({ user, postLength, setUser }) => {
 
 	const follow = async () => {
 		try {
+			const privateFetch = getPrivateFetch(token);
 			const response = await privateFetch.post(
 				`/api/user/follow/${user._id}`
 			);
 			if (response.data.success) {
-				setUserData(response.data.user);
+				updateUser(response.data.user);
 				setDf(true);
 				setUser(response.data.followedUser);
 			}
@@ -46,11 +50,12 @@ const ProfileDetails = ({ user, postLength, setUser }) => {
 	const unFollow = async () => {
 		try {
 			console.log(user._id);
+			const privateFetch = getPrivateFetch(token);
 			const response = await privateFetch.delete(
 				`/api/user/unfollow/${user._id}`
 			);
 			if (response.data.success) {
-				setUserData(response.data.user);
+				updateUser(response.data.user);
 				setDf(false);
 				setUser(response.data.unFollowedUser);
 			}
@@ -63,7 +68,7 @@ const ProfileDetails = ({ user, postLength, setUser }) => {
 	return (
 		<div className="ProfileDetails">
 			<div className="ProfileDetails__image">
-				<img src={"/" + user.profilePicture} alt="" />
+				<img src={BASE_URL + "/" + user.profilePicture} alt="" />
 			</div>
 
 			<div className="ProfileDetails__user-options">
@@ -80,7 +85,7 @@ const ProfileDetails = ({ user, postLength, setUser }) => {
 						</button>
 						<button
 							className="button logout"
-							onClick={() => logout()}
+							onClick={() => dispatch(removeToken())}
 						>
 							Logout
 						</button>

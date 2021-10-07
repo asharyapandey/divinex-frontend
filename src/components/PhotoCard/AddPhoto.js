@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./AddPhoto.scss";
-import { privateFetch } from "../../utils/fetch";
+import { getPrivateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function AddPhoto({
 	modal,
@@ -15,6 +16,7 @@ function AddPhoto({
 	const [image, setImage] = useState("/" + img);
 	const [file, setFile] = useState();
 	const [error, setError] = useState("");
+	const userState = useSelector((state) => state.user);
 
 	const handleFileChange = (e) => {
 		const selectedFile = e.target.files[0];
@@ -36,6 +38,7 @@ function AddPhoto({
 				data.append("caption", caption);
 
 				if (edit) {
+					const privateFetch = getPrivateFetch(userState.token);
 					const response = await privateFetch.put(
 						`/api/post/${id}`,
 						data
@@ -46,6 +49,7 @@ function AddPhoto({
 						modal();
 					}
 				} else {
+					const privateFetch = getPrivateFetch(userState.token);
 					const response = await privateFetch.post("/api/post", data);
 					if (response.data.success) {
 						toast.success("Post Added");

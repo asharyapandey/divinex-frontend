@@ -1,20 +1,22 @@
 import { useState, useEffect, useContext } from "react";
 import Card from "./Card";
-import { privateFetch } from "../../utils/fetch";
+import { getPrivateFetch } from "../../utils/fetch";
 import { toast } from "react-toastify";
-import { UserContext } from "../../contexts/UserContext";
+import { useSelector } from "react-redux";
 
 function CardList() {
 	const [feed, setFeed] = useState([]);
-	const { token } = useContext(UserContext);
+
+	const userState = useSelector((state) => state.user);
 
 	const getFeed = async () => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.get("/api/post/feed");
 			setFeed(response.data.posts);
 		} catch (error) {
 			console.log(error);
-			toast.error("Some Kind of error occured", {
+			toast.error("Some Kind of error occurred", {
 				position: "top-center",
 			});
 		}
@@ -32,7 +34,7 @@ function CardList() {
 
 	useEffect(() => {
 		getFeed();
-	}, [token]);
+	}, []);
 
 	return (
 		<div>

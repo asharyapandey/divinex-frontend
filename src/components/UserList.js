@@ -1,14 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { UserContext } from "../contexts/UserContext";
-import { privateFetch } from "../utils/fetch";
+import { getPrivateFetch } from "../utils/fetch";
+import { useSelector } from "react-redux";
+import BASE_URL from "../utils/baseUrl";
 
 const UserList = () => {
 	const [users, setUsers] = useState([]);
-	const { userInfo } = useContext(UserContext);
+	const userState = useSelector((state) => state.user);
 
 	useEffect(() => {
+		const privateFetch = getPrivateFetch(userState.token);
 		// getting suggested users
 		privateFetch
 			.get("/api/user/suggest")
@@ -23,11 +25,14 @@ const UserList = () => {
 		<div className="UserList">
 			<div className="user">
 				<div className="image">
-					<img src={"/" + userInfo.profilePicture} alt="" />
+					<img
+						src={BASE_URL + "/" + userState.user.profilePicture}
+						alt=""
+					/>
 				</div>
 				<div className="username">
-					<Link to={`/profile/${userInfo._id}`}>
-						{userInfo.username}
+					<Link to={`/profile/${userState.user._id}`}>
+						{userState.user.username}
 					</Link>
 				</div>
 			</div>
@@ -36,7 +41,10 @@ const UserList = () => {
 				return (
 					<div className="user" key={user._id}>
 						<div className="image">
-							<img src={"/" + user.profilePicture} alt="" />
+							<img
+								src={BASE_URL + "/" + user.profilePicture}
+								alt=""
+							/>
 						</div>
 						<div className="username">
 							<Link to={`/profile/${user._id}`}>

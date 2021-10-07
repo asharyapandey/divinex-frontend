@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { privateFetch } from "../utils/fetch";
+import { getPrivateFetch } from "../utils/fetch";
 import "./Notification.scss";
+import { useSelector } from "react-redux";
 
 function Notification() {
 	const [notifications, setNotifications] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const userState = useSelector((state) => state.user);
 	useEffect(() => {
 		setLoading(true);
+		const privateFetch = getPrivateFetch(userState.token);
 		privateFetch
 			.get("/api/user/notification")
 			.then((response) => {
@@ -24,6 +27,7 @@ function Notification() {
 
 	const deleteNotification = async (id) => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.delete(
 				`/api/user/notification/${id}`
 			);

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
-import { privateFetch } from "../utils/fetch";
+import { getPrivateFetch } from "../utils/fetch";
 import "./EditProfile.scss";
+import { useSelector } from "react-redux";
 
 const EditProfilePage = ({ match }) => {
 	const [id, setID] = useState("");
@@ -11,6 +12,7 @@ const EditProfilePage = ({ match }) => {
 	const [file, setFile] = useState(null);
 	const [gender, setGender] = useState("Male");
 	const history = useHistory();
+	const userState = useSelector((state) => state.user);
 
 	const handleFileChange = (e) => {
 		const selectedFile = e.target.files[0];
@@ -25,6 +27,7 @@ const EditProfilePage = ({ match }) => {
 
 	const getUser = async () => {
 		try {
+			const privateFetch = getPrivateFetch(userState.token);
 			const respose = await privateFetch.get(
 				`/api/user/${match.params.userID}`
 			);
@@ -48,6 +51,7 @@ const EditProfilePage = ({ match }) => {
 			if (file) data.append("image", file);
 			data.append("email", email);
 			data.append("gender", gender);
+			const privateFetch = getPrivateFetch(userState.token);
 			const response = await privateFetch.put(`/api/user/${id}`, data);
 			if (response.data.success) {
 				toast.success("Profile Updated");
