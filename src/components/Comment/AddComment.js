@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import BASE_URL from "../../utils/baseUrl";
 
 function AddComment({ addComment, editComment, comment, setComment, action }) {
 	const { user: userInfo } = useSelector((state) => state.user);
@@ -12,7 +13,7 @@ function AddComment({ addComment, editComment, comment, setComment, action }) {
 		<div className="AddComment">
 			<div className="AddComment__profile">
 				<img
-					src={"/" + userInfo.profilePicture}
+					src={BASE_URL + "/" + userInfo.profilePicture}
 					alt={userInfo.username}
 				/>
 			</div>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "./Auth.scss";
 import LoginImage from "./login.jpg";
 import { Link, useHistory } from "react-router-dom";
@@ -49,7 +49,8 @@ function Login() {
 				toast.success("Login Successful", {
 					position: "top-center",
 				});
-				// go to login
+				// go to dashboard
+				history.push("/");
 			} catch (error) {
 				console.log(error);
 				toast.error("Please Check Credentials and try again", {
